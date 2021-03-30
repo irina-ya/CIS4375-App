@@ -1,7 +1,7 @@
 <template>
   <div>
-    <header-template v-if="isAuthenticated" />
-    <header-template-anonymous v-else/>
+    <header-template>
+  
     <div class="beta-banner">
       <div class="alert alert-info">
         <span class="badge badge-info">Beta</span>&nbsp;
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import headerAnonymous from './views/templates/header-anonymous.vue'
 import header from './views/templates/header.vue'
 import footer from './views/templates/footer.vue'
 
@@ -37,26 +36,7 @@ export default {
       transitionName: 'slide-up'
     }
   },
-  watch: {
-    isAuthenticated(val) {
-      if (val) {
-        swal('You have successfuly logged in.', 'welcome!', 'success')
-        if (this.$route.query.redirect) {
-          this.$router.push({
-            path: this.$route.query.redirect
-          })
-        } else {
-          this.$router.push('/home')
-        }
-      } else {
-        // swal('You have been logged out.', 'Good bye!', 'info')
-        this.$router.push('/home')
-      }
-    },
-    $route(to, from) {
-      this.setTransition(to, from)
-    }
-  },
+
   created() {},
   methods: {
     setTransition(to, from) {

@@ -17,7 +17,6 @@ Major packages inlcuded and configured (as required)
 
 * Sequelize configures models from a directory, just add a new model and
   sequelize will load it.
-* Authentication is already setup using JSONWebToken for Node.js
 * Add custom route endpoints
 
 [Build Setup](./backend/README.md)

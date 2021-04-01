@@ -1,5 +1,6 @@
 module.exports = {
   associate: models => {
-    models.login.belongsTo(models.accountType)
+    models.State_Table.hasMany(models.Customer, {foreignKey: "stateID"})
+    models.Customer.belongsTo(models.State_Table, {foreignKey: "stateID"})
   }
 }

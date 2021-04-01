@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
+
 module.exports = function(sequelize, DataTypes) {
+
   return sequelize.define('Customer', {
     customerID: {
       autoIncrement: true,
@@ -61,10 +63,10 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'Customer',
     schema: 'dbo',
-    timestamps: true,
+    timestamps: false,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {

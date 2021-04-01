@@ -15,10 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'State_Table',
     schema: 'dbo',
-    timestamps: true,
+    timestamps: false,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {

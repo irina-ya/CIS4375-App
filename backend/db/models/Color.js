@@ -1,27 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('accountType', {
-    id: {
+  return sequelize.define('Color', {
+    colorID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    description: {
+    colorName: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'accountType',
+    tableName: 'Color',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -30,10 +22,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__accountT__3213E83FD5BE09A4",
+        name: "PK__Color__70A64C3D489B5541",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "colorID" },
         ]
       },
     ]

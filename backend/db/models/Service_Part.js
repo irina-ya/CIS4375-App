@@ -1,27 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('accountType', {
-    id: {
+  return sequelize.define('Service_Part', {
+    servicePartID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    description: {
+    partDescription: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+    partSellPrice: {
+      type: DataTypes.DECIMAL(18,2),
+      allowNull: true
     },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+    partPurchasePrice: {
+      type: DataTypes.DECIMAL(18,2),
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'accountType',
+    tableName: 'Service_Part',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -30,10 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__accountT__3213E83FD5BE09A4",
+        name: "PK__Service___584D4DB090192005",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "servicePartID" },
         ]
       },
     ]

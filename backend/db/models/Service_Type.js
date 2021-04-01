@@ -1,39 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('login', {
-    id: {
+  return sequelize.define('Service_Type', {
+    serviceTypeID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    email: {
+    serviceTypeDesc: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
+    serviceLaborCost: {
+      type: DataTypes.DECIMAL(18,2),
+      allowNull: true
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    accountTypeId: {
+    serviceLaborHours: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'accountType',
-        key: 'id'
-      }
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'login',
+    tableName: 'Service_Type',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -42,10 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83F7F226637",
+        name: "PK__Service___FB4CEA19A762DCD7",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "serviceTypeID" },
         ]
       },
     ]

@@ -37,4 +37,4 @@ doing minor changes you can easily switch to any database of your choice.
 * Stylus is enabled
 * Some Vue-mixins for authentication/user info
 
-[Build Setup](./frontend/README.md)
+[Build Setup](./frontend/README.md

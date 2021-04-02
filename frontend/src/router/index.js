@@ -5,7 +5,7 @@ import store from '../store'
 // home
 import index from '../views/home/index.vue'
 import feedback from '../views/home/feedback.vue'
-import about from '../views/home/about.vue'
+import customers from '../views/home/customers.vue'
 import contact from '../views/home/contact.vue'
 // error
 import notFound from '../views/error/notFound.vue'
@@ -13,6 +13,8 @@ import notFound from '../views/error/notFound.vue'
 import register from '../views/account/register.vue'
 import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
+//edits
+import editcustomer from '../views/edits/editcustomer.vue'
 
 vue.use(VueRouter)
 
@@ -32,15 +34,15 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/about',
-      component: about,
+      path: '/customers',
+      component: customers,
       meta: {
         isOpen: true,
       },
     },
     {
-      path: '/contact',
-      component: contact,
+      path: '/editcustomer',
+      component: editcustomer,
       meta: {
         isOpen: true,
       },
@@ -85,7 +87,7 @@ const router = new VueRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (store.getters.isAuthenticated) {
     if (to.path === '/auth/logout') {
       store.dispatch('logout')
@@ -106,6 +108,6 @@ router.beforeEach((to, from, next) => {
       },
     })
   }
-})
+}) */
 
 export default router

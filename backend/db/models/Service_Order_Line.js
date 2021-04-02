@@ -41,10 +41,10 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'Service_Order_Line',
     schema: 'dbo',
-    timestamps: true,
+    timestamps: false,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
-    deletedAt: false
+    createdAt: false,
+    updatedAt: false,
+    deletedAt: false,
   });
 };

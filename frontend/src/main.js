@@ -12,8 +12,10 @@ import VeeValidate from 'vee-validate'
 import App from './App.vue'
 import store from './store'
 import router from './router'
+import VueFormulate from '@braid/vue-formulate'
 
 Vue.use(VeeValidate)
+Vue.use(VueFormulate)
 
 // eslint-disable-next-line
 new Vue({

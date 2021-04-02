@@ -42,6 +42,8 @@ const router = new VueRouter({
     },
     {
       path: '/editcustomer',
+      name: "editcustomer",
+      props: true,
       component: editcustomer,
       meta: {
         isOpen: true,

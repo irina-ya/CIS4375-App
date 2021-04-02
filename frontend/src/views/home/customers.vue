@@ -89,7 +89,7 @@ components: {
         })},
     editCustomer(params){
       this.$router.push({
-        path: 'editcustomer',
+        name: 'editcustomer',
         params: {
           customerID: params.row.customerID
         }
@@ -108,7 +108,7 @@ components: {
 <style scoped>
 
 button {
-  background-color: #b3b1b1;
+  background-color: #969292;
   color: rgb(12, 12, 12);
   padding: 14px 20px;
   margin: 8px 0;

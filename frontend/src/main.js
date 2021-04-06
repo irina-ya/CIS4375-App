@@ -11,13 +11,13 @@ import 'bootstrap-css-only/css/bootstrap.min.css'
 import 'mdbvue/lib/css/mdb.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
-import VeeValidate from 'vee-validate'
+//import VeeValidate from 'vee-validate'
 import App from './App.vue'
 import store from './store'
 import router from './router'
 import VueFormulate from '@braid/vue-formulate'
 
-Vue.use(VeeValidate)
+//Vue.use(VeeValidate)
 Vue.use(VueFormulate)
 
 // eslint-disable-next-line
@@ -27,6 +27,7 @@ new Vue({
   router,
   components: {
     App,
+    VueFormulate
   },
   template: '<App/>',
 })

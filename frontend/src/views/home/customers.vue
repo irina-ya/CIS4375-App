@@ -8,6 +8,7 @@
       </div>
       <div class="tableHeading-right">
         <button>Add New Customer</button>
+        
       </div>
   </div>
       <div>
@@ -108,13 +109,13 @@ components: {
 <style scoped>
 
 button {
-  background-color: #969292;
+  background-color: #b9b9b9;
   color: rgb(12, 12, 12);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
 }
 
 </style>

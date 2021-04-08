@@ -33,6 +33,33 @@ router.get('/find/:customerID', (req, res, next) => {
 })
 
 //Update customer
+router.put('/update/:customerID', (req, res, next) => {
+  const db = req.app.get('db')
 
+  const customerID = req.params.customerID
+
+  const customerFirstName = req.body.customerFirstName
+  const customerLastName = req.body.customerLastName
+
+  db.Customer.update({
+    customerFirstName: customerFirstName,
+    customerLastName: customerLastName
+  }, {
+    where: {
+      customerID: customerID
+    }
+  })
+
+})
+
+//Add new customer
+router.post('/register', (req, res, next) =>{
+  const db = req.app.get('db')
+  const newCustomer = db.customers.build(req.body)
+
+  newCustomer.save()
+              .then(() => res.sendStatus(200))
+            }) 
+        
 
 module.exports = router

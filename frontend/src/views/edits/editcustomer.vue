@@ -29,9 +29,6 @@
                     name="customerPhone"
                     v-model="customer.model.customerPhone"
                 /> <br>
-
-                <button>Add Service Order</button>
-
             </div>
             <div class="editForm-right">
                 <FormulateInput
@@ -66,10 +63,16 @@
                {{ data.stateName }}
               </option>
             </select>
-
-            <br>
-            <button>Update User</button>
+            <br><br><br>
+            <div class="editFooter">
+                <button v-if="isNew" class="swal2-styled">Add New</button>
+                <button v-if="!isNew" class="swal2-styled">Delete</button>
+                <button v-if="!isNew" class="swal2-styled" v-on:click="updateCustomer">Update</button>
+                <button v-if="!isNew" class="swal2-styled">Add Car</button>
             </div>
+
+            </div>
+            
         </form>
 
     </div>
@@ -88,7 +91,6 @@ export default {
         return{
             isNew: 'true',
             DB_DATA: [],
-            STATUS_DATA: [],
             STATE_DATA: [],
             customer:{
                 model: {
@@ -131,10 +133,41 @@ export default {
         })
         },
 
-        renameKey( obj, oldKey, newKey ) {
-            obj[newKey] = obj[oldKey];
-            delete obj[oldKey];
-         }
+        updateCustomer(){
+            const customerID = this.customerID
+            axios.put(`http://localhost:3000/api/customers/update/` + customerID, this.customer.model)
+                .then((res) => {
+                
+                Swal.fire({
+                    title: 'Done!',
+                    text: 'The customer has been updated!',
+                    icon: 'success'
+                })
+                $this.router.push('/customers')
+                })
+                .catch(() => {
+                Swal.fire('Error', 'Something went wrong (updating customer)', 'error')
+                })
+            },
+
+        register(){
+            axios.get('http://localhost:3000/api/customers/register')
+            .then((res) => {
+                Swal.fire({
+                    title: 'Done!',
+                    text: 'The customer has been added!',
+                    icon: 'success'
+                })
+                $this.router.push('/customers')
+            }).catch(() => {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'Something is wrong, Please try again!',
+                    icon: 'error'
+                })
+            })
+        }
+
     },
 
     beforeMount(){
@@ -148,13 +181,5 @@ export default {
 
 </script>
 <style scoped>
-button {
-  background-color: #b9b9b9;
-  color: rgb(12, 12, 12);
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-}
+
 </style>

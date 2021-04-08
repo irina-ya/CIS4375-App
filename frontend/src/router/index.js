@@ -35,6 +35,7 @@ const router = new VueRouter({
     },
     {
       path: '/customers',
+      name: "customers",
       component: customers,
       meta: {
         isOpen: true,

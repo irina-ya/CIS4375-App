@@ -7,7 +7,7 @@
         <span class="tableHeading-text">Customer List</span>
       </div>
       <div class="tableHeading-right">
-        <button>Add New Customer</button>
+        <button v-on:click="addNewCustomer">Add New Customer</button>
         
       </div>
   </div>
@@ -48,12 +48,14 @@
 </template>
 
 <script>
+
 import axios from 'axios';
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table';
 import Swal from 'sweetalert2'
 
 export default {
+name: 'customers',
 data() {
   return {
     DB_DATA: [],
@@ -95,6 +97,11 @@ components: {
           customerID: params.row.customerID
         }
       })
+    },
+    addNewCustomer(){
+      this.$router.push({
+        name: 'editcustomer',
+      })
     }
   },
   beforeMount() {
@@ -109,13 +116,13 @@ components: {
 <style scoped>
 
 button {
-  background-color: #b9b9b9;
+  background-color: #e7e7e7;
   color: rgb(12, 12, 12);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
 }
 
 </style>

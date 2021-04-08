@@ -6,6 +6,8 @@ import store from '../store'
 import index from '../views/home/index.vue'
 import feedback from '../views/home/feedback.vue'
 import customers from '../views/home/customers.vue'
+import serviceorders from '../views/home/serviceorders.vue'
+import serviceparts from '../views/home/serviceparts.vue'
 import contact from '../views/home/contact.vue'
 // error
 import notFound from '../views/error/notFound.vue'
@@ -46,6 +48,20 @@ const router = new VueRouter({
       name: "editcustomer",
       props: true,
       component: editcustomer,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/serviceorders',
+      component: serviceorders,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/serviceparts',
+      component: serviceparts,
       meta: {
         isOpen: true,
       },

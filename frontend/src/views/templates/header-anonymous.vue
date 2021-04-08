@@ -17,12 +17,12 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          to="/orders">Service Orders</router-link>
+          to="/serviceorders">Service Orders</router-link>
       </li>
       <li class="nav-item">
         <router-link
           class="nav-link"
-          to="/servicepart">Service Parts</router-link>
+          to="/serviceparts">Service Parts</router-link>
       </li>
     </ul>
     

@@ -40,10 +40,20 @@ router.put('/update/:customerID', (req, res, next) => {
 
   const customerFirstName = req.body.customerFirstName
   const customerLastName = req.body.customerLastName
+  const customerPhone = req.body.customerPhone
+  const customerCity = req.body.customerCity
+  const customerAddress1 = req.body.customerAddress1
+  const customerAddress2 = req.body.customerAddress2
+  const customerEmail = req.body.customerEmail
 
   db.Customer.update({
     customerFirstName: customerFirstName,
-    customerLastName: customerLastName
+    customerLastName: customerLastName,
+    customerPhone: customerPhone,
+    customerAddress1: customerAddress1,
+    customerAddress2: customerAddress2,
+    customerEmail: customerEmail,
+    customerCity: customerCity
   }, {
     where: {
       customerID: customerID
@@ -53,13 +63,32 @@ router.put('/update/:customerID', (req, res, next) => {
 })
 
 //Add new customer
-router.post('/register', (req, res, next) =>{
+router.post('/addnew', (req, res, next) =>{
   const db = req.app.get('db')
-  const newCustomer = db.customers.build(req.body)
 
-  newCustomer.save()
-              .then(() => res.sendStatus(200))
-            }) 
-        
+  //WHY ARE YOU EMPTY WHAT IS WRONG PLZ BB TALK TO ME
+
+  const customerFirstName = req.query.customerFirstName
+  const customerLastName = req.body.customerLastName
+  const customerPhone = req.body.customerPhone
+  const customerCity = req.body.customerCity
+  const customerAddress1 = req.body.customerAddress1
+  const customerAddress2 = req.body.customerAddress2
+  const customerEmail = req.body.customerEmail
+
+  console.log(JSON.stringify(req.body.customerFirstName))
+
+  /* db.Customer.create({
+    customerFirstName: customerFirstName,
+    customerLastName: customerLastName,
+    customerPhone: customerPhone,
+    customerAddress1: customerAddress1,
+    customerAddress2: customerAddress2,
+    customerEmail: customerEmail,
+    customerCity: customerCity
+
+  })  */
+
+  })
 
 module.exports = router

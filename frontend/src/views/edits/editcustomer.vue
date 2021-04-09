@@ -65,7 +65,7 @@
             </select>
             <br><br><br>
             <div class="editFooter">
-                <button v-if="isNew" class="swal2-styled">Add New</button>
+                <button v-if="isNew" class="swal2-styled" v-on:click="addNewCustomer">Add New</button>
                 <button v-if="!isNew" class="swal2-styled">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateCustomer">Update</button>
                 <button v-if="!isNew" class="swal2-styled">Add Car</button>
@@ -150,15 +150,15 @@ export default {
                 })
             },
 
-        register(){
-            axios.get('http://localhost:3000/api/customers/register')
+        addNewCustomer(){
+            axios.post('http://localhost:3000/api/customers/addnew')
             .then((res) => {
                 Swal.fire({
                     title: 'Done!',
                     text: 'The customer has been added!',
                     icon: 'success'
                 })
-                $this.router.push('/customers')
+                
             }).catch(() => {
                 Swal.fire({
                     title: 'Oops!',

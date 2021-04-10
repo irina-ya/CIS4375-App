@@ -5,7 +5,7 @@ var _Car_Model = require("./Car_Model");
 var _Car_Year = require("./Car_Year");
 var _Color = require("./Color");
 var _Customer = require("./Customer");
-var _Customer_Car = require("./Customer_Car");
+//var _Customer_Car = require("./Customer_Car");
 var _Customer_Status = require("./Customer_Status");
 var _Service_Invoice = require("./Service_Invoice");
 var _Service_Order = require("./Service_Order");
@@ -25,7 +25,7 @@ function initModels(sequelize) {
   var Car_Year = _Car_Year(sequelize, DataTypes);
   var Color = _Color(sequelize, DataTypes);
   var Customer = _Customer(sequelize, DataTypes);
-  var Customer_Car = _Customer_Car(sequelize, DataTypes);
+  //var Customer_Car = _Customer_Car(sequelize, DataTypes);
   var Customer_Status = _Customer_Status(sequelize, DataTypes);
   var Service_Invoice = _Service_Invoice(sequelize, DataTypes);
   var Service_Order = _Service_Order(sequelize, DataTypes);
@@ -38,8 +38,8 @@ function initModels(sequelize) {
   var accountType = _accountType(sequelize, DataTypes);
   var login = _login(sequelize, DataTypes);
 
-  Customer_Car.belongsTo(Car, { as: "car", foreignKey: "carID"});
-  Car.hasMany(Customer_Car, { as: "Customer_Cars", foreignKey: "carID"});
+  //Customer_Car.belongsTo(Car, { as: "car", foreignKey: "carID"});
+  //Car.hasMany(Customer_Car, { as: "Customer_Cars", foreignKey: "carID"});
   Car.belongsTo(Car_Make, { as: "carMake", foreignKey: "carMakeID"});
   Car_Make.hasMany(Car, { as: "Cars", foreignKey: "carMakeID"});
   Car.belongsTo(Car_Model, { as: "carModel", foreignKey: "carModelID"});
@@ -48,12 +48,12 @@ function initModels(sequelize) {
   Car_Year.hasMany(Car, { as: "Cars", foreignKey: "yearID"});
   Car.belongsTo(Color, { as: "color", foreignKey: "colorID"});
   Color.hasMany(Car, { as: "Cars", foreignKey: "colorID"});
-  Customer_Car.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
-  Customer.hasMany(Customer_Car, { as: "Customer_Cars", foreignKey: "customerID"});
+ // Customer_Car.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
+ // Customer.hasMany(Customer_Car, { as: "Customer_Cars", foreignKey: "customerID"});
   Service_Order.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
   Customer.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "customerID"});
-  Service_Order.belongsTo(Customer_Car, { as: "customerCar", foreignKey: "customerCarID"});
-  Customer_Car.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "customerCarID"});
+ // Service_Order.belongsTo(Customer_Car, { as: "customerCar", foreignKey: "customerCarID"});
+ // Customer_Car.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "customerCarID"});
   Customer.belongsTo(Customer_Status, { as: "customerStatus", foreignKey: "customerStatusID"});
   Customer_Status.hasMany(Customer, { as: "Customers", foreignKey: "customerStatusID"});
   Car.belongsTo(Service_Order, { as: "serviceOrder", foreignKey: "serviceOrderID"});
@@ -84,7 +84,6 @@ function initModels(sequelize) {
     Car_Year,
     Color,
     Customer,
-    Customer_Car,
     Customer_Status,
     Service_Invoice,
     Service_Order,

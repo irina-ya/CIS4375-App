@@ -23,8 +23,8 @@ module.exports = {
     //Service_Order
     models.Customer.hasMany(models.Service_Order, {foreignKey: "customerID"})
     models.Service_Order.belongsTo(models.Customer, {foreignKey: "customerID"})
-    models.Customer_Car.hasMany(models.Service_Order, {foreignKey: "customerCarID"})
-    models.Service_Order.belongsTo(models.Customer_Car, {foreignKey: "customerCarID"})
+    models.Car.hasMany(models.Service_Order, {foreignKey: "carID"})
+    models.Service_Order.belongsTo(models.Car, {foreignKey: "carID"})
     models.Service_Type.hasMany(models.Service_Order, {foreignKey: "serviceTypeID"})
     models.Service_Order.belongsTo(models.Service_Type, {foreignKey: "serviceTypeID"})
     models.Service_Order_Status.hasMany(models.Service_Order, {foreignKey: "serviceOrderStatusID"})

@@ -24,12 +24,12 @@ module.exports = function(sequelize, DataTypes) {
         key: 'customerID'
       }
     },
-    customerCarID: {
+    carID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Customer_Car',
-        key: 'customerCarID'
+        model: 'Car',
+        key: 'carID'
       }
     },
     serviceTypeID: {

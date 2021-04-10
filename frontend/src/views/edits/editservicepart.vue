@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="editForm">
+        <form class="editForm" onsubmit="return false;">
             <div class="editForm-left">
                 <FormulateInput
                     type="text"

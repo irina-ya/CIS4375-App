@@ -17,6 +17,7 @@ import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 //edits
 import editcustomer from '../views/edits/editcustomer.vue'
+import editservicepart from '../views/edits/editservicepart.vue'
 
 vue.use(VueRouter)
 
@@ -62,6 +63,15 @@ const router = new VueRouter({
     {
       path: '/serviceparts',
       component: serviceparts,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/editservicepart',
+      name: "editservicepart",
+      props: true,
+      component: editservicepart,
       meta: {
         isOpen: true,
       },

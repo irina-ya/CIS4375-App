@@ -57,7 +57,6 @@ export default {
 data() {
   return {
     DB_DATA: [],
-    myAPI: `http://localhost:3000/api/serviceorders/find`,
      dataFields: [{
         label: 'ID',
         field: 'serviceOrderID',

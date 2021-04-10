@@ -7,7 +7,7 @@
                 <br>
                 <select
                     v-model="car.model.carMakeID"
-                    name="carmakeID"
+                    name="carMakeID"
                     >
                 <option
                     v-for="(data, index) in MAKE_LIST"

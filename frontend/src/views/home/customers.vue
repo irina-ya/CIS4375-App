@@ -59,7 +59,6 @@ name: 'customers',
 data() {
   return {
     DB_DATA: [],
-    myAPI: `http://localhost:3000/api/customers/find`,
      dataFields: [{
         label: 'ID',
         field: 'customerID',
@@ -92,7 +91,7 @@ components: {
         })},
     editCustomer(params){
       this.$router.push({
-        name: 'editcustomer',
+        name: '/customers/editcustomer',
         params: {
           customerID: params.row.customerID
         }
@@ -100,7 +99,7 @@ components: {
     },
     addNewCustomer(){
       this.$router.push({
-        name: 'editcustomer',
+        name: '/customers/editcustomer',
       })
     }
   },

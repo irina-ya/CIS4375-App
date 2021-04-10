@@ -17,6 +17,7 @@ import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 //edits
 import editcustomer from '../views/edits/editcustomer.vue'
+import addcar from '../views/edits/addcar.vue'
 
 vue.use(VueRouter)
 
@@ -37,20 +38,20 @@ const router = new VueRouter({
     },
     {
       path: '/customers',
-      name: "customers",
+      //name: "customers",
       component: customers,
-      meta: {
-        isOpen: true,
-      },
+      //meta: {
+      //  isOpen: true,
+      //},
     },
     {
-      path: '/editcustomer',
-      name: "editcustomer",
+      path: '/customers/editcustomer',
+      name: "/customers/editcustomer",
       props: true,
       component: editcustomer,
-      meta: {
-        isOpen: true,
-      },
+      //meta: {
+      //  isOpen: true,
+      //},
     },
     {
       path: '/serviceorders',
@@ -67,11 +68,11 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/feedback',
-      component: feedback,
-      meta: {
-        isOpen: true,
-      },
+      path: '/addcar',
+      name: "addcar",
+      component: addcar,
+      props: true
+
     },
     {
       path: '/auth/register',
@@ -106,8 +107,8 @@ const router = new VueRouter({
   ],
 })
 
-/* router.beforeEach((to, from, next) => {
-  if (store.getters.isAuthenticated) {
+router.beforeEach((to, from, next) => {
+  /*if (store.getters.isAuthenticated) {
     if (to.path === '/auth/logout') {
       store.dispatch('logout')
     } else if (to.matched.some(record => record.meta.skipIfAuthorized)) {
@@ -117,16 +118,16 @@ const router = new VueRouter({
     } else {
       next()
     }
-  } else if (to.matched.some(record => record.meta.isOpen)) {
+  } else if (to.matched.some(record => record.meta.isOpen)) {*/
     next()
-  } else {
+  /*} else {
     next({
       path: '/auth/login',
       query: {
         redirect: to.fullPath,
       },
     })
-  }
-}) */
+  }*/
+}) 
 
 export default router

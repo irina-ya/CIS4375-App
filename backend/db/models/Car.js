@@ -7,6 +7,18 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    customerID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Customer',
+        key: 'customerID'
+      }
+    },
+    lisencePlate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     carModelID: {
       type: DataTypes.INTEGER,
       allowNull: true,

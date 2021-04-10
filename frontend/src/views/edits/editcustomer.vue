@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="editForm">
+        <form class="editForm" onsubmit="return false;">
             <div class="editForm-left">
                 <FormulateInput
                     type="text"
@@ -91,7 +91,7 @@
                 <button v-if="isNew" class="swal2-styled" v-on:click="addNewCustomer">Add New</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="deleteCustomer">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateCustomer">Update</button>
-                <button v-if="!isNew" class="swal2-styled">Add Car</button>
+                <button v-if="!isNew" class="swal2-styled" v-on:click="addNewCar">Add Car</button>
             </div>
 
             </div>
@@ -102,7 +102,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
+import config from '../../config'
 import Swal from 'sweetalert2';
 
 
@@ -136,7 +137,7 @@ export default {
 
     methods: {
         populateCustomerData(){
-            axios.get('http://localhost:3000/api/customers/find/' + this.customerID)
+            axios.get(`${config.api}/api/customers/find/` + this.customerID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
                     this.customer.model.customerFirstName = res.data.customerFirstName,
@@ -168,54 +169,49 @@ export default {
 
         updateCustomer(){
             const customerID = this.customerID
+            
             axios.put(`http://localhost:3000/api/customers/update/` + customerID, this.customer.model)
-                .then((res) => {
-                
-                Swal.fire({
-                    title: 'Done!',
-                    text: 'The customer has been updated!',
-                    icon: 'success'
-                })
-                $this.router.push('/customers')
-                })
-                .catch(() => {
-                Swal.fire('Error', 'Something went wrong (updating customer)', 'error')
-                })
+                .then((res) => console.log('im2'))
+
+                Swal.fire('Done!', 'The customer has been updated!', 'success'
+                )
+                this.$router.push('/customers')
+
             },
 
         addNewCustomer(){
             axios.post('http://localhost:3000/api/customers/addnew', this.customer.model)
-            .then((res) => {
                 Swal.fire({
                     title: 'Done!',
                     text: 'The customer has been added!',
                     icon: 'success'
                 })
-                
-            }).catch(() => {
-                Swal.fire({
-                    title: 'Oops!',
-                    text: 'Something is wrong, Please try again!',
-                    icon: 'error'
-                })
-            })
         },
 
         deleteCustomer(){
         const customerID = this.customerID
         axios.delete(`http://localhost:3000/api/customers/delete/` + customerID)
-            .then((res) => {
 
             Swal.fire(
                 'Done!',
                 'The customer has been deleted.',
                 'success'
             )
+          
+            
+        },
+        
+        addNewCar(){
+            //console.log(this.DB_DATA.customerID)
+            const customer_id = this.DB_DATA.customerID
+            //console.log(customer_id)
+            this.$router.push({
+                name: 'addcar',
+                params: {
+                    customerID: customer_id
+                }
             })
-            .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting customer)', 'error')
-            })
-            }
+        }
 
     },
 

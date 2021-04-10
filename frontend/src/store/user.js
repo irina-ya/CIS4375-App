@@ -1,5 +1,5 @@
 import session from '../utilities/session'
-import axios from '../utilities/axios'
+
 import config from '../config'
 import router from '../router'
 /* eslint-disable no-param-reassign */

@@ -23,8 +23,7 @@ router.get('/find/:customerID', (req, res, next) => {
     where: {customerID: custumerID},
     include: [
       db.State_Table,
-      db.Customer_Status,
-      db.Customer_Car
+      db.Customer_Status
     ],
       raw : true,
   }).then((Customers) => 

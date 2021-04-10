@@ -1,7 +1,7 @@
 <template>
   <div>
-    <header-template v-if="isAuthenticated" />
-    <header-template-anonymous v-else/>
+    
+    <header-template-anonymous />
     <div class="beta-banner">
       <div class="alert alert-info">
         <span class="badge badge-info">Beta</span>&nbsp;
@@ -37,7 +37,7 @@ export default {
       transitionName: 'slide-up'
     }
   },
-  watch: {
+ /*  watch: {
     isAuthenticated(val) {
       if (val) {
         swal('You have successfuly logged in.', 'welcome!', 'success')
@@ -56,7 +56,7 @@ export default {
     $route(to, from) {
       this.setTransition(to, from)
     }
-  },
+  }, */
   created() {},
   methods: {
     setTransition(to, from) {

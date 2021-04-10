@@ -7,6 +7,7 @@ const customers = require('./customers')
 const serviceorders = require('./serviceorders')
 const serviceparts = require('./serviceparts')
 const states = require('./states')
+const customerstatus = require('./customerstatus')
 
 
 router.use('/api/home', home)
@@ -14,5 +15,6 @@ router.use('/api/customers', customers)
 router.use('/api/serviceorders', serviceorders)
 router.use('/api/serviceparts', serviceparts)
 router.use('/api/states', states)
+router.use('/api/customerstatus', customerstatus)
 
 module.exports = router

@@ -45,6 +45,7 @@ router.put('/update/:customerID', (req, res, next) => {
   const customerAddress1 = req.body.customerAddress1
   const customerAddress2 = req.body.customerAddress2
   const customerEmail = req.body.customerEmail
+  const customerStatusID = req.body.customerStatusID
 
   db.Customer.update({
     customerFirstName: customerFirstName,
@@ -53,7 +54,8 @@ router.put('/update/:customerID', (req, res, next) => {
     customerAddress1: customerAddress1,
     customerAddress2: customerAddress2,
     customerEmail: customerEmail,
-    customerCity: customerCity
+    customerCity: customerCity, 
+    customerStatusID: customerStatusID
   }, {
     where: {
       customerID: customerID
@@ -66,29 +68,34 @@ router.put('/update/:customerID', (req, res, next) => {
 router.post('/addnew', (req, res, next) =>{
   const db = req.app.get('db')
 
-  //WHY ARE YOU EMPTY WHAT IS WRONG PLZ BB TALK TO ME
+  const newCustomer = db.Customer.build(req.body)
 
-  const customerFirstName = req.query.customerFirstName
-  const customerLastName = req.body.customerLastName
-  const customerPhone = req.body.customerPhone
-  const customerCity = req.body.customerCity
-  const customerAddress1 = req.body.customerAddress1
-  const customerAddress2 = req.body.customerAddress2
-  const customerEmail = req.body.customerEmail
+  //console.log(JSON.stringify(newCustomer))
 
-  console.log(JSON.stringify(req.body.customerFirstName))
+  newCustomer.save()
+        .then(() => {
+          res.sendStatus(200)
+        })
+        .catch(next)
+    })
 
-  /* db.Customer.create({
-    customerFirstName: customerFirstName,
-    customerLastName: customerLastName,
-    customerPhone: customerPhone,
-    customerAddress1: customerAddress1,
-    customerAddress2: customerAddress2,
-    customerEmail: customerEmail,
-    customerCity: customerCity
+//Delete customer
+router.delete('/delete/:customerID', (req, res, next) => {
+  const customerID = req.params.customerID;
+  const db = req.app.get('db')
 
-  })  */
+  db.Customer.destroy({
+      where: { customerID: customerID }
+  }).then(() => {
+      res.status(200).send('The record has been deleted!');
+  }).catch(err => {
+      console.log('There was an error deleting customers', JSON.stringify(err))
+      return res.send(err)
+  });
+})
 
-  })
+    
+
+  
 
 module.exports = router

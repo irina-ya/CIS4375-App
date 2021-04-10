@@ -29,8 +29,6 @@
                     name="customerPhone"
                     v-model="customer.model.customerPhone"
                 /> <br>
-            </div>
-            <div class="editForm-right">
                 <FormulateInput
                     type="text"
                     label="Address 1"
@@ -45,6 +43,8 @@
                     v-model="customer.model.customerAddress2"
                 />
                 <br>
+            </div>
+            <div class="editForm-right">       
                 <FormulateInput
                     type="text"
                     label="City"
@@ -53,6 +53,7 @@
                 /> <br>
 
             <label>State</label>
+            <br>
             <select
                 v-model="customer.model.stateID"
                 name="stateID"
@@ -63,10 +64,32 @@
                {{ data.stateName }}
               </option>
             </select>
+            <br><br>
+
+            <FormulateInput
+                    type="text"
+                    label="Zip"
+                    name="customerZip"
+                    v-model="customer.model.customerZip"
+                /> <br>
+
+            <label>Status</label>
+            <br>
+            <select
+                v-model="customer.model.customerStatusID"
+                name="customerStatusID"
+                >
+              <option
+                v-for="(data, index) in STATUS_DATA"
+                :key="index" :value="data.customerStatusID">
+               {{ data.customerStatusDesc }}
+              </option>
+            </select>
+
             <br><br><br>
             <div class="editFooter">
                 <button v-if="isNew" class="swal2-styled" v-on:click="addNewCustomer">Add New</button>
-                <button v-if="!isNew" class="swal2-styled">Delete</button>
+                <button v-if="!isNew" class="swal2-styled" v-on:click="deleteCustomer">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateCustomer">Update</button>
                 <button v-if="!isNew" class="swal2-styled">Add Car</button>
             </div>
@@ -92,6 +115,7 @@ export default {
             isNew: 'true',
             DB_DATA: [],
             STATE_DATA: [],
+            STATUS_DATA: [],
             customer:{
                 model: {
                     customerStatusID: '',
@@ -103,7 +127,8 @@ export default {
                     customerAddress1: '',
                     customerAddress2: '',
                     customerPhone: '',
-                    customerEmail: ''
+                    customerEmail: '',
+                    customerStatusID: ''
                 }
             }
         }
@@ -121,6 +146,7 @@ export default {
                     this.customer.model.customerCity = res.data.customerCity,
                     this.customer.model.customerAddress1 = res.data.customerAddress1,
                     this.customer.model.customerAddress2 = res.data.customerAddress2,
+                    this.customer.model.customerStatusID = res.data.customerStatusID,
                     this.customer.model.stateID = res.data.stateID
             })
         },
@@ -131,6 +157,13 @@ export default {
             }).catch(() => {
           Swal.fire('Error', 'Something went wrong!', 'error')
         })
+
+        axios.get('http://localhost:3000/api/customerstatus/find').then((res) =>{
+                this.STATUS_DATA = res.data;
+            }).catch(() => {
+          Swal.fire('Error', 'Something went wrong!', 'error')
+        })
+
         },
 
         updateCustomer(){
@@ -151,7 +184,7 @@ export default {
             },
 
         addNewCustomer(){
-            axios.post('http://localhost:3000/api/customers/addnew')
+            axios.post('http://localhost:3000/api/customers/addnew', this.customer.model)
             .then((res) => {
                 Swal.fire({
                     title: 'Done!',
@@ -166,7 +199,23 @@ export default {
                     icon: 'error'
                 })
             })
-        }
+        },
+
+        deleteCustomer(){
+        const customerID = this.customerID
+        axios.delete(`http://localhost:3000/api/customers/delete/` + customerID)
+            .then((res) => {
+
+            Swal.fire(
+                'Done!',
+                'The customer has been deleted.',
+                'success'
+            )
+            })
+            .catch(() => {
+            Swal.fire('Error', 'Something went wrong (deleting customer)', 'error')
+            })
+            }
 
     },
 

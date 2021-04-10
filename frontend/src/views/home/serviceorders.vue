@@ -4,7 +4,7 @@
    
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Service Ordders List</span>
+        <span class="tableHeading-text">Service Orders List</span>
       </div>
       <div class="tableHeading-right">
         <button>Add New Service Order</button>
@@ -119,13 +119,13 @@ components: {
 <style scoped>
 
 button {
-  background-color: #b9b9b9;
+  background-color: #e7e7e7;
   color: rgb(12, 12, 12);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
 }
 
 </style>

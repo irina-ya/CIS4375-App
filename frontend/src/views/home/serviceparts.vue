@@ -90,7 +90,7 @@ components: {
         })},
     editServicePart(params){
       this.$router.push({
-        name: 'editservicepart',
+        name: '/serviceparts/editservicepart',
         params: {
           servicePartID: params.row.servicePartID
         }
@@ -98,7 +98,7 @@ components: {
     },
     addNewServicePart(){
       this.$router.push({
-        name: 'editservicepart',
+        name: '/serviceparts/editservicepart',
       })
     }
   },

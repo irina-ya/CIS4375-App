@@ -32,6 +32,46 @@ router.get('/find/:serviceOrderID', (req, res, next) => {
 })
 
 //Update service order
+router.put('/update/:serviceOrderID', (req, res, next) => {
+  const db = req.app.get('db')
 
+  const serviceOrderID = req.params.serviceOrderID
+
+  const carID = req.body.carID
+  const serviceTypeID = req.body.serviceTypeID
+  const serviceOrderStatusID = req.body.serviceOrderStatusID
+  const serviceOrderDate = req.body.serviceOrderDate
+  const serviceOrderEstimatedCompletion = req.body.serviceOrderEstimatedCompletion
+  const serviceOrderComments = req.body.serviceOrderComments
+
+  db.Service_Order.update({
+    carID: carID,
+    serviceTypeID: serviceTypeID,
+    serviceOrderStatusID: serviceOrderStatusID,
+    serviceOrderDate: serviceOrderDate,
+    serviceOrderEstimatedCompletion: serviceOrderEstimatedCompletion,
+    serviceOrderComments: serviceOrderComments
+  }, {
+    where: {
+      serviceOrderID: serviceOrderID
+    }
+  })
+
+})
+
+//Delete service order
+router.delete('/delete/:serviceOrderID', (req, res, next) => {
+  const serviceOrderID = req.params.serviceOrderID;
+  const db = req.app.get('db')
+
+  db.Service_Part.destroy({
+      where: { serviceOrderID: serviceOrderID }
+  }).then(() => {
+      res.status(200).send('The record has been deleted!');
+  }).catch(err => {
+      console.log('There was an error deleting servive order', JSON.stringify(err))
+      return res.send(err)
+  });
+})
 
 module.exports = router

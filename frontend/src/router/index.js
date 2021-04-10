@@ -18,6 +18,7 @@ import account from '../views/account/index.vue'
 //edits
 import editcustomer from '../views/edits/editcustomer.vue'
 import editservicepart from '../views/edits/editservicepart.vue'
+import editserviceorder from '../views/edits/editserviceorder.vue'
 import addcar from '../views/edits/addcar.vue'
 
 vue.use(VueRouter)
@@ -62,6 +63,12 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/serviceorders/editserviceorder',
+      name: "/serviceorders/editserviceorder",
+      props: true,
+      component: editserviceorder,
+    },
+    {
       path: '/serviceparts',
       component: serviceparts,
       meta: {
@@ -76,10 +83,10 @@ const router = new VueRouter({
 
     },
     {
-      path: '/editservicepart',
-      name: "editservicepart",
+      path: '/serviceparts/editservicepart',
+      name: "/serviceparts/editservicepart",
       props: true,
-      component: editservicepart,
+      component: editservicepart
     },
     {
       path: '/auth/register',

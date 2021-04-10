@@ -1,63 +1,78 @@
 <template>
 <div>
-    <div class="editForm-left">
-        <label>Make</label>
-            <br>
-            <select
-                v-model="car.model.carMakeID"
-                name="carmakeID"
-                >
-              <option
-                v-for="(data, index) in MAKE_LIST"
-                :key="index" :value="data.carMakeID">
-               {{ data.carMake }}
-              </option>
-            </select>
-            <br><br>
-            
-            <lable>Model</lable>
-            <br>
-            <select
-                v-model="car.model.carModelID"
-                name="carModelID"
-                >
-              <option
-                v-for="(data, index) in MODEL_LIST"
-                :key="index" :value="data.carModelID">
-               {{ data.carModel }}
-              </option>
-            </select>
-            <br><br>
-            
-            <lable>Car Year</lable>
-            <br>
-            <select
-                v-model="car.model.yearID"
-                name="yearID"
-                >
-              <option
-                v-for="(data, index) in YEAR_LIST"
-                :key="index" :value="data.yearID">
-               {{ data.carYear }}
-              </option>
-            </select>
-            <br><br>
-            
-            <lable>Color</lable>
-            <br>
-            <select
-                v-model="car.model.colorID"
-                name="yearID"
-                >
-              <option
-                v-for="(data, index) in COLOR_LIST"
-                :key="index" :value="data.colorID">
-               {{ data.colorName }}
-              </option>
-            </select>
+    
+    <form class="editForm" onsubmit="return false;">
+        <div class="editForm-left">
+            <label>Make</label>
+                <br>
+                <select
+                    v-model="car.model.carMakeID"
+                    name="carmakeID"
+                    >
+                <option
+                    v-for="(data, index) in MAKE_LIST"
+                    :key="index" :value="data.carMakeID">
+                {{ data.carMake }}
+                </option>
+                </select>
+                <br><br>
+                
+                <lable>Model</lable>
+                <br>
+                <select
+                    v-model="car.model.carModelID"
+                    name="carModelID"
+                    >
+                <option
+                    v-for="(data, index) in MODEL_LIST"
+                    :key="index" :value="data.carModelID">
+                {{ data.carModel }}
+                </option>
+                </select>
+                <br><br>
+                
+                <lable>Car Year</lable>
+                <br>
+                <select
+                    v-model="car.model.yearID"
+                    name="yearID"
+                    >
+                <option
+                    v-for="(data, index) in YEAR_LIST"
+                    :key="index" :value="data.yearID">
+                {{ data.carYear }}
+                </option>
+                </select>
+                <br><br>
+                
+                <lable>Color</lable>
+                <br>
+                <select
+                    v-model="car.model.colorID"
+                    name="yearID"
+                    >
+                <option
+                    v-for="(data, index) in COLOR_LIST"
+                    :key="index" :value="data.colorID">
+                {{ data.colorName }}
+                </option>
+                </select>
+                <br><br>
 
+                <FormulateInput
+                        type="text"
+                        label="License Plate"
+                        name="licensePlate"
+                        v-model="car.model.licensePlate"
+                    />
+        </div>
+        
+            <button class="swal2-styled" v-on:click="createCar">Add Car to Customer</button>
+        
+        
+        </form>
     </div>
-</div>
+
     
 </template>
 
@@ -77,11 +92,12 @@ export default {
             COLOR_LIST:[],
             car:{
                 model: {
-                    carID: '',
+                    customerID: this.customerID,
                     carModelID: '',
                     carMakeID: '',
                     yearID: '',
-                    colorID:''
+                    colorID:'',
+                    licensePlate: ''
                 }
             },
             
@@ -138,3 +154,7 @@ export default {
 }
         
 </script>
+
+<style scoped>
+
+</style>

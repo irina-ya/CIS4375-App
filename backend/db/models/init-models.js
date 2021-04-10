@@ -48,12 +48,12 @@ function initModels(sequelize) {
   Car_Year.hasMany(Car, { as: "Cars", foreignKey: "yearID"});
   Car.belongsTo(Color, { as: "color", foreignKey: "colorID"});
   Color.hasMany(Car, { as: "Cars", foreignKey: "colorID"});
- // Customer_Car.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
- // Customer.hasMany(Customer_Car, { as: "Customer_Cars", foreignKey: "customerID"});
+  Car.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
+  Customer.hasMany(Car, { as: "Car", foreignKey: "customerID"});
   Service_Order.belongsTo(Customer, { as: "customer", foreignKey: "customerID"});
   Customer.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "customerID"});
- // Service_Order.belongsTo(Customer_Car, { as: "customerCar", foreignKey: "customerCarID"});
- // Customer_Car.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "customerCarID"});
+  Service_Order.belongsTo(Car, { as: "Car", foreignKey: "carID"});
+  Car.hasMany(Service_Order, { as: "Service_Orders", foreignKey: "carID"});
   Customer.belongsTo(Customer_Status, { as: "customerStatus", foreignKey: "customerStatusID"});
   Customer_Status.hasMany(Customer, { as: "Customers", foreignKey: "customerStatusID"});
   Car.belongsTo(Service_Order, { as: "serviceOrder", foreignKey: "serviceOrderID"});

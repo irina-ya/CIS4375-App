@@ -15,10 +15,6 @@ module.exports = function(sequelize, DataTypes) {
         key: 'customerID'
       }
     },
-    lisencePlate: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     carModelID: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -50,6 +46,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Color',
         key: 'colorID'
       }
+    },
+    licensePlate: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     serviceOrderID: {
       type: DataTypes.INTEGER,

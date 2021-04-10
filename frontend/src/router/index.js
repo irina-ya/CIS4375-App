@@ -17,6 +17,7 @@ import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 //edits
 import editcustomer from '../views/edits/editcustomer.vue'
+import editservicepart from '../views/edits/editservicepart.vue'
 import addcar from '../views/edits/addcar.vue'
 
 vue.use(VueRouter)
@@ -38,7 +39,7 @@ const router = new VueRouter({
     },
     {
       path: '/customers',
-      //name: "customers",
+      name: "customers",
       component: customers,
       //meta: {
       //  isOpen: true,
@@ -73,6 +74,12 @@ const router = new VueRouter({
       component: addcar,
       props: true
 
+    },
+    {
+      path: '/editservicepart',
+      name: "editservicepart",
+      props: true,
+      component: editservicepart,
     },
     {
       path: '/auth/register',

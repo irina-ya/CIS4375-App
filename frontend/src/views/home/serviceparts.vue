@@ -7,7 +7,7 @@
         <span class="tableHeading-text">Service Parts List</span>
       </div>
       <div class="tableHeading-right">
-        <button>Add New Service Part</button>
+        <button v-on:click="addNewServicePart">Add New Service Part</button>
         
       </div>
   </div>
@@ -54,6 +54,7 @@ import { VueGoodTable } from 'vue-good-table';
 import Swal from 'sweetalert2'
 
 export default {
+name: 'serviceparts',
 data() {
   return {
     DB_DATA: [],
@@ -85,14 +86,19 @@ components: {
         .then((response) => {
           this.DB_DATA = response.data}
           ).catch(() => {
-          Swal.fire('Error', 'Something went wrong (Loading Customer List)', 'error')
+          Swal.fire('Error', 'Something went wrong (Loading Service Part List)', 'error')
         })},
-    editCustomer(params){
+    editServicePart(params){
       this.$router.push({
-        name: 'editserviceparts',
+        name: 'editservicepart',
         params: {
           servicePartID: params.row.servicePartID
         }
+      })
+    },
+    addNewServicePart(){
+      this.$router.push({
+        name: 'editservicepart',
       })
     }
   },
@@ -108,13 +114,13 @@ components: {
 <style scoped>
 
 button {
-  background-color: #b9b9b9;
+  background-color: #e7e7e7;
   color: rgb(12, 12, 12);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
 }
 
 </style>

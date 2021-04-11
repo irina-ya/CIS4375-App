@@ -8,7 +8,8 @@ router.get('/find', (req, res, next) => {
     return db.Service_Order.findAll({
       include: [
         db.Service_Order_Status,
-        db.Service_Type
+        db.Service_Type,
+        db.Customer
       ],
         raw : true,
     }).then((Service_Orders) => res.send(Service_Orders)).catch((err) => {console.log('There was an error in getting Service Order List')
@@ -23,7 +24,8 @@ router.get('/find/:serviceOrderID', (req, res, next) => {
     where: {serviceOrderID: svcOrderID},
     include: [
         db.Service_Order_Status,
-        db.Service_Type
+        db.Service_Type,
+        db.Customer
     ],
       raw : true,
   }).then((Service_Orders) => 

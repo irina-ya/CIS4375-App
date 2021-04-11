@@ -133,33 +133,22 @@ export default {
         updateServiceOrder(){
             const serviceOrderID = this.serviceOrderID
             axios.put(`http://localhost:3000/api/serviceorders/update/` + serviceOrderID, this.svcorder.model)
-                .then((res) => {
                 
                 Swal.fire({
                     title: 'Done!',
                     text: 'The service order has been updated!',
                     icon: 'success'
                 })
-                $this.router.push('/serviceorders')
-                })
-                .catch(() => {
-                Swal.fire('Error', 'Something went wrong (updating service order)', 'error')
-                })
+                $this.router.push('/serviceorders')     
         },
         deleteServiceOrder(){
         const serviceOrderID = this.serviceOrderID
         axios.delete(`http://localhost:3000/api/serviceorders/delete/` + serviceOrderID)
-            .then((res) => {
-
             Swal.fire(
                 'Done!',
                 'The service order has been deleted.',
                 'success'
             )
-            })
-            .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting service order)', 'error')
-            })
             }
 
     },

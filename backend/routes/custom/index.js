@@ -13,6 +13,9 @@ const models = require('./models')
 const caryears = require('./caryears')
 const colors = require('./colors')
 const car = require('./car')
+const serviceorderstatus = require('./serviceorderstatus')
+const servicetypes = require('./servicetypes')
+const { route } = require('./serviceorderstatus')
 
 
 router.use('/api/home', home)
@@ -26,5 +29,7 @@ router.use('/api/models', models)
 router.use('/api/caryears', caryears)
 router.use('/api/colors', colors)
 router.use('/api/car', car)
+router.use('/api/serviceorderstatus', serviceorderstatus)
+router.use('/api/servicetypes', servicetypes)
 
 module.exports = router

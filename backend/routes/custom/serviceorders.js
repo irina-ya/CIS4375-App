@@ -74,4 +74,17 @@ router.delete('/delete/:serviceOrderID', (req, res, next) => {
   });
 })
 
+//Add new service order
+router.post('/addnew', (req, res, next) =>{
+  const db = req.app.get('db')
+
+  const newServiceOrder = db.Service_Order.build(req.body)
+
+  newServiceOrder.save()
+        .then(() => {
+          res.sendStatus(200)
+        })
+        .catch(next) 
+    }) 
+
 module.exports = router

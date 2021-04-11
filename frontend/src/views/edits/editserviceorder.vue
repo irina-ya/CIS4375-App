@@ -2,12 +2,7 @@
     <div>
         <form class="editForm" onsubmit="return false;">
             <div class="editForm-left">
-                <FormulateInput
-                    type="text"
-                    label="Car ID"
-                    name="carID"
-                    v-model="svcorder.model.carID"
-                />
+
             <br>
             <label>Service Status</label>
             <br>
@@ -47,7 +42,9 @@
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateServiceOrder">Update</button> 
             </div>
             <br><br><br>
-            <div class="editForm-right"> 
+            <div class="editForm-right">
+            
+                <div slot="table-actions"></div>
 
                 <vue-good-table
                     :columns="dataFields"
@@ -60,7 +57,8 @@
                     }"
                     :sort-options="{
                     enabled: true,
-                    initialSortBy: {field: 'serviceTypeID', type: 'asc'}
+                    initialSortBy: {field: 'serviceTypeDesc', type: 'asc'}
+
                     }"
                     :pagination-options="{
                     enabled: true,
@@ -75,21 +73,23 @@
                     ofLabel: 'of',
                     }"
                     compactMode
-                    @on-row-dblclick="editServiceLine"
+
                 />
 
-            </div>
-            
-            
-        </form>
+  
+                </div>
 
-    </div>
+        </form>
+        
+</div>
+    
 </template>
 
 <script>
 import axios from 'axios';
-import config from '../../config';
-import Swal from 'sweetalert2';
+import 'vue-good-table/dist/vue-good-table.css'
+import { VueGoodTable } from 'vue-good-table';
+import Swal from 'sweetalert2'
 
 
 export default {
@@ -105,8 +105,6 @@ export default {
             SERVICE_LINE: [],
             svcorder:{
                 model: {
-                    carID: '',
-                    //serviceTypeID: '',
                     serviceOrderStatusID: '',
                     serviceOrderDate: '',
                     serviceOrderEstimatedCompletion: '',
@@ -115,23 +113,40 @@ export default {
             },
             dataFields: [{
                 label: 'Service Type',
-                field: 'customerID',
+
+
+                field: 'serviceTypeDesc'
+            },{
+                label: 'Service Part',
+                field: 'partDescription'
+            },{
+                label: 'Service Part Cost',
+                field: 'partSellPrice'
             },{
                 label: 'Labor Cost',
-                field: 'customerFirstName'
+                field: 'serviceLaborCost'
             },{
                 label: 'Labor Hours',
-                field: 'customerLastName'
-            }]
+                field: 'serviceLaborHours'
+            },{
+                label: 'Service Line Cost',
+                field: 'serviceOrderLineCost'
+            },{
+                label: 'Status',
+                field: 'serviceOrderLineStatus'
+            }
+            ]
+
         }
     },
-
+    components: {
+    'vue-good-table': VueGoodTable
+    },
     methods: {
         populateServiceOrderData(){
             axios.get('http://localhost:3000/api/serviceorders/find/' + this.serviceOrderID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
-
                     this.svcorder.model.carID = this.DB_DATA[0].carID,
                     this.svcorder.model.serviceTypeID = this.DB_DATA[0].serviceTypeID,
                     this.svcorder.model.serviceOrderStatusID = this.DB_DATA[0].serviceOrderStatusID,
@@ -141,8 +156,32 @@ export default {
 
          })
 
+
         },
 
+
+=======
+                    
+                    this.svcorder.model.serviceOrderStatusID = this.DB_DATA[0].serviceOrderStatusID,
+                    this.svcorder.model.serviceOrderDate = this.DB_DATA[0].serviceOrderDate,
+                    this.svcorder.model.serviceOrderEstimatedCompletion = this.DB_DATA[0].serviceOrderEstimatedCompletion,
+                    this.svcorder.model.serviceOrderComments = this.DB_DATA[0].serviceOrderComments
+            })
+        },
+
+        loadServiceLine(){
+            axios.get(`http://localhost:3000/api/serviceorderline/find/`+ this.serviceOrderID)
+                .then((response) => {
+                    this.SERVICE_LINE = response.data;
+                   
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'))
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborCost','serviceLaborCost'))
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborHours','serviceLaborHours'))
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Order_Line_Status.serviceOrderLineStatus','serviceOrderLineStatus'))
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partDescription','partDescription'))
+                    this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partSellPrice','partSellPrice'))
+                })
+        },
 
 
         loadDropDowns(){
@@ -159,6 +198,12 @@ export default {
                 })
 
         },
+
+        renameKey( obj, oldKey, newKey ) {
+            obj[newKey] = obj[oldKey];
+            delete obj[oldKey];
+            },
+
         updateServiceOrder(){
             const serviceOrderID = this.serviceOrderID
             axios.put(`http://localhost:3000/api/serviceorders/update/` + serviceOrderID, this.svcorder.model)
@@ -178,7 +223,7 @@ export default {
                 'The service order has been deleted.',
                 'success'
             )
-            }
+        }
 
     },
 
@@ -187,6 +232,7 @@ export default {
         if (this.serviceOrderID !== undefined){
             this.isNew = false
             this.populateServiceOrderData()
+            this.loadServiceLine()
         }
     }
 }

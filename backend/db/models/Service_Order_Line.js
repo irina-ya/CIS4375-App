@@ -1,6 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Service_Order_Line', {
+    serviceOrderLineID: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
     serviceOrderID: {
       type: DataTypes.INTEGER,
       allowNull: false,

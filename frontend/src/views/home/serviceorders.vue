@@ -7,7 +7,7 @@
         <span class="tableHeading-text">Service Orders List</span>
       </div>
       <div class="tableHeading-right">
-        <button>Add New Service Order</button>
+        
         
       </div>
   </div>
@@ -63,7 +63,7 @@ data() {
         type: 'number'
       },{
         label: 'Car ID',
-        field: 'customerCarID'
+        field: 'carID'
       },{
         label: 'Service Type',
         field: 'serviceTypeDesc'
@@ -73,6 +73,9 @@ data() {
       },{
         label: 'Date of Service',
         field: 'serviceOrderDate'
+      },{
+        label: 'Estimated Completion of Service',
+        field: 'serviceOrderEstimatedCompletion'
       },{
         label: 'Service Comments',
         field: 'serviceOrderComments'
@@ -99,9 +102,9 @@ components: {
         })},
     editServiceOrder(params){
       this.$router.push({
-        name: 'editserviceorders',
+        name: '/serviceorders/editserviceorder',
         params: {
-          servicePartID: params.row.servicePartID
+          serviceOrderID: params.row.serviceOrderID
         }
       })
     }

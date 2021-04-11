@@ -32,7 +32,6 @@
                 <button v-if="isNew" class="swal2-styled" v-on:click="addNewServicePart">Add New</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="deleteServicePart">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateServicePart">Update</button>
-                <button v-if="!isNew" class="swal2-styled">Add Car</button>
             </div>
 
             </div>

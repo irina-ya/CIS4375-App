@@ -53,6 +53,8 @@
                 />
                <button v-if="!isNew" class="swal2-styled" v-on:click="deleteServiceOrder">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateServiceOrder">Update</button> 
+                <br>
+                <button class="swal2-styled" v-on:click="updateServiceOrder">Add Service</button> 
             </div>
             <br><br><br>
             <div class="editForm-right">
@@ -89,7 +91,8 @@
                 />
                 <br>
                 <p>Order Total: ${{ this.invoice_total }}</p>
-  
+                <br>
+                
                 </div>
 
         </form>
@@ -182,10 +185,10 @@ export default {
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Order_Line_Status.serviceOrderLineStatus','serviceOrderLineStatus'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partDescription','partDescription'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partSellPrice','partSellPrice'))
-                    
+
                     //calculate invoice total
                     var total = this.SERVICE_LINE.map(cost => cost.serviceOrderLineCost).reduce((x, cost) => cost+x);
-                    console.log(total)
+                    
                     this.invoice_total = total;
                     
                 })

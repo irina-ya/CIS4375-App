@@ -215,12 +215,12 @@ export default {
         },
         addNewServiceOrder(){
             //console.log(this.DB_DATA.customerID)
-            const customer_id = this.DB_DATA.customerID
+            const customerID = this.DB_DATA.customerID
             //console.log(customer_id)
             this.$router.push({
                 name: 'addserviceorder',
                 params: {
-                    customerID: customer_id
+                    customerID: customerID
                 }
             })
         }

@@ -8,10 +8,10 @@
           name="carID"
           v-model="serviceorder.model.carID"
         />
-        <br />
+        <br>
 
         <label>License Plate</label>
-        <br />
+        <br>
         <select
                 v-model="serviceorder.model.carID"
                 name="carID">
@@ -21,22 +21,9 @@
                 {{ data.licensePlate }}
                 </option>
                 </select>
-        <br />
-
-        <label>Service Type</label>
-        <br />
-        <select
-                v-model="serviceorder.model.serviceTypeID"
-                name="serviceTypeID">
-                <option
-                    v-for="(data, index) in TYPE_DATA"
-                    :key="index" :value="data.serviceTypeID">
-                {{ data.serviceTypeDesc }}
-                </option>
-                </select>
-        <br />
+        <br><br>
         <label>Service Status</label>
-        <br />
+        <br>
         <select
                 v-model="serviceorder.model.serviceOrderStatusID"
                 name="serviceOrderStatusID">
@@ -46,7 +33,7 @@
                 {{ data.serviceOrderStatus }}
                 </option>
                 </select>
-        <br />
+        <br><br>
         <FormulateInput
           type="date"
           label="Date of Service"
@@ -67,11 +54,13 @@
           name="serviceOrderComments"
           v-model="serviceorder.model.serviceOrderComments"
         />
+        <br><br>
+        <button class="swal2-styled" v-on:click="createServiceOrder">
+        Add Service Order to Customer
+        </button>
       </div>
 
-      <button class="swal2-styled" v-on:click="createServiceOrder">
-        Add Service Order to Customer
-      </button>
+      
     </form>
   </div>
 </template>

@@ -8,25 +8,22 @@
                     name="partDescription"
                     v-model="svcpart.model.partDescription"
                 />
-             
-            </div>
-            <div class="editForm-middle">
+                <br/>
                 <FormulateInput
                     type="text"
                     label="Retail Price"
                     name="partSellPrice"
                     v-model="svcpart.model.partSellPrice"
                 />
-              
-            </div>
-            <div class="editForm-right">
+                <br/>
                 <FormulateInput
                     type="text"
                     label="Wholesale Price"
                     name="partPurchasePrice"
                     v-model="svcpart.model.partPurchasePrice"
                 />
-              
+            </div>
+              <div class="editForm-right">
             <br><br><br>
             <div class="editFooter">
                 <button v-if="isNew" class="swal2-styled" v-on:click="addNewServicePart">Add New</button>
@@ -69,9 +66,9 @@ export default {
             axios.get('http://localhost:3000/api/serviceparts/find/' + this.servicePartID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
-                    this.svcpart.model.partDescription = res.data.partDescription,
-                    this.svcpart.model.partSellPrice = res.data.partSellPrice,
-                    this.svcpart.model.partPurchasePrice = res.data.partPurchasePrice
+                    this.svcpart.model.partDescription = this.DB_DATA[0].partDescription,
+                    this.svcpart.model.partSellPrice = this.DB_DATA[0].partSellPrice,
+                    this.svcpart.model.partPurchasePrice = this.DB_DATA[0].partPurchasePrice
             })
         },
         updateServicePart(){

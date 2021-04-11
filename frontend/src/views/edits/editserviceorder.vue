@@ -108,13 +108,22 @@ export default {
             axios.get('http://localhost:3000/api/serviceorders/find/' + this.serviceOrderID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
-                    this.svcorder.model.carID = res.data.carID,
-                    this.svcorder.model.serviceTypeID = res.data.serviceTypeID,
-                    this.svcorder.model.serviceOrderStatusID = res.data.serviceOrderStatusID,
-                    this.svcorder.model.serviceOrderDate = res.data.serviceOrderDate,
-                    this.svcorder.model.serviceOrderEstimatedCompletion = res.data.serviceOrderEstimatedCompletion,
-                    this.svcorder.model.serviceOrderComments = res.data.serviceOrderComments
-            })
+
+                    this.svcorder.model.carID = this.DB_DATA[0].carID,
+                    this.svcorder.model.serviceTypeID = this.DB_DATA[0].serviceTypeID,
+                    this.svcorder.model.serviceOrderStatusID = this.DB_DATA[0].serviceOrderStatusID,
+                    this.svcorder.model.serviceOrderDate = this.DB_DATA[0].serviceOrderDate,
+                    this.svcorder.model.serviceOrderEstimatedCompletion = this.DB_DATA[0].serviceOrderEstimatedCompletion,
+                    this.svcorder.model.serviceOrderComments = this.DB_DATA[0].serviceOrderComments
+
+
+            //         this.svcorder.model.carID = res.data.carID,
+            //         this.svcorder.model.serviceTypeID = res.data.serviceTypeID,
+            //         this.svcorder.model.serviceOrderStatusID = res.data.serviceOrderStatusID,
+            //         this.svcorder.model.serviceOrderDate = res.data.serviceOrderDate,
+            //         this.svcorder.model.serviceOrderEstimatedCompletion = res.data.serviceOrderEstimatedCompletion,
+            //         this.svcorder.model.serviceOrderComments = res.data.serviceOrderComments
+         })
         },
         loadDropDowns(){
             axios.get('http://localhost:3000/api/servicetypes/find').then((res) =>{

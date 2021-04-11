@@ -9,7 +9,7 @@ module.exports = {
     //Car
     models.Car_Model.hasMany(models.Car, {foreignKey: "carModelID"})
     models.Car.belongsTo(models.Car_Model, {foreignKey: "carModelID"})
-    models.Car_Make.hasMany(models.Car, {foreignKey: {foreignKey: "carMakeID"}})
+    models.Car_Make.hasMany(models.Car, {foreignKey: "carMakeID"})
     models.Car.belongsTo(models.Car_Make, {foreignKey: "carMakeID"})
     models.Car_Year.hasMany(models.Car, {foreignKey: "yearID"})
     models.Car.belongsTo(models.Car_Year, {foreignKey: "yearID"})

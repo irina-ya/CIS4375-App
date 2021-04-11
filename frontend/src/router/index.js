@@ -20,6 +20,7 @@ import editcustomer from '../views/edits/editcustomer.vue'
 import editservicepart from '../views/edits/editservicepart.vue'
 import editserviceorder from '../views/edits/editserviceorder.vue'
 import addcar from '../views/edits/addcar.vue'
+import addserviceorder from '../views/edits/addserviceorder.vue'
 
 vue.use(VueRouter)
 
@@ -67,6 +68,13 @@ const router = new VueRouter({
       name: "/serviceorders/editserviceorder",
       props: true,
       component: editserviceorder,
+    },
+    {
+      path: '/addserviceorder',
+      name: "addserviceorder",
+      component: addserviceorder,
+      props: true
+
     },
     {
       path: '/serviceparts',

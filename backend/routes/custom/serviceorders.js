@@ -19,7 +19,7 @@ router.get('/find', (req, res, next) => {
 router.get('/find/:serviceOrderID', (req, res, next) => {
   const db = req.app.get('db')
   const svcOrderID = req.params.serviceOrderID
-  return db.Service_Order.find({
+  return db.Service_Order.findAll({
     where: {serviceOrderID: svcOrderID},
     include: [
         db.Service_Order_Status,
@@ -73,5 +73,18 @@ router.delete('/delete/:serviceOrderID', (req, res, next) => {
       return res.send(err)
   });
 })
+
+//Add new service order
+router.post('/addnew', (req, res, next) =>{
+  const db = req.app.get('db')
+
+  const newServiceOrder = db.Service_Order.build(req.body)
+
+  newServiceOrder.save()
+        .then(() => {
+          res.sendStatus(200)
+        })
+        .catch(next) 
+    }) 
 
 module.exports = router

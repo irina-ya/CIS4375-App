@@ -98,7 +98,7 @@ components: {
           this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Order_Status.serviceOrderStatus','serviceOrderStatus'));
           }
           ).catch(() => {
-          Swal.fire('Error', 'Something went wrong (Loading Customer List)', 'error')
+          Swal.fire('Error', 'Something went wrong (Loading service order List)', 'error')
         })},
     editServiceOrder(params){
       this.$router.push({

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router({ caseSensitive: true })
 
-//Display all service parts
+//Display all service types
 router.get('/find', (req, res, next) => {
     const db = req.app.get('db')
 

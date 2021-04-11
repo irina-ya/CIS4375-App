@@ -19,7 +19,7 @@ router.get('/find', (req, res, next) => {
 router.get('/find/:customerID', (req, res, next) => {
   const db = req.app.get('db')
   const custumerID = req.params.customerID
-  return db.Customer.find({
+  return db.Customer.findAll({
     where: {customerID: custumerID},
     include: [
       db.State_Table,

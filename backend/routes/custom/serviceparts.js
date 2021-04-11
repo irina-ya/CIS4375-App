@@ -18,7 +18,7 @@ router.get('/find', (req, res, next) => {
 router.get('/find/:servicePartID', (req, res, next) => {
   const db = req.app.get('db')
   const svcPartID = req.params.servicePartID
-  return db.Service_Part.find({
+  return db.Service_Part.findAll({
     where: {servicePartID: svcPartID},
     include: [
         

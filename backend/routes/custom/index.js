@@ -15,8 +15,8 @@ const colors = require('./colors')
 const car = require('./car')
 const serviceorderstatus = require('./serviceorderstatus')
 const servicetypes = require('./servicetypes')
-const { route } = require('./serviceorderstatus')
 const serviceorderline = require('./serviceorderline')
+
 
 
 router.use('/api/home', home)

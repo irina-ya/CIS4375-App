@@ -92,6 +92,7 @@
                 <button v-if="!isNew" class="swal2-styled" v-on:click="deleteCustomer">Delete</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateCustomer">Update</button>
                 <button v-if="!isNew" class="swal2-styled" v-on:click="addNewCar">Add Car</button>
+                <button v-if="!isNew" class="swal2-styled" v-on:click="addNewServiceOrder">Create Service Order</button>
             </div>
 
             </div>
@@ -140,15 +141,15 @@ export default {
             axios.get(`${config.api}/api/customers/find/` + this.customerID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
-                    this.customer.model.customerFirstName = res.data.customerFirstName,
-                    this.customer.model.customerLastName = res.data.customerLastName,
-                    this.customer.model.customerEmail = res.data.customerEmail,
-                    this.customer.model.customerPhone = res.data.customerPhone,
-                    this.customer.model.customerCity = res.data.customerCity,
-                    this.customer.model.customerAddress1 = res.data.customerAddress1,
-                    this.customer.model.customerAddress2 = res.data.customerAddress2,
-                    this.customer.model.customerStatusID = res.data.customerStatusID,
-                    this.customer.model.stateID = res.data.stateID
+                    this.customer.model.customerFirstName = this.DB_DATA[0].customerFirstName,
+                    this.customer.model.customerLastName = this.DB_DATA[0].customerLastName,
+                    this.customer.model.customerEmail = this.DB_DATA[0].customerEmail,
+                    this.customer.model.customerPhone = this.DB_DATA[0].customerPhone,
+                    this.customer.model.customerCity = this.DB_DATA[0].customerCity,
+                    this.customer.model.customerAddress1 = this.DB_DATA[0].customerAddress1,
+                    this.customer.model.customerAddress2 = this.DB_DATA[0].customerAddress2,
+                    this.customer.model.customerStatusID = this.DB_DATA[0].customerStatusID,
+                    this.customer.model.stateID = this.DB_DATA[0].stateID
             })
         },
 
@@ -207,6 +208,17 @@ export default {
             //console.log(customer_id)
             this.$router.push({
                 name: 'addcar',
+                params: {
+                    customerID: customer_id
+                }
+            })
+        },
+        addNewServiceOrder(){
+            //console.log(this.DB_DATA.customerID)
+            const customer_id = this.DB_DATA.customerID
+            //console.log(customer_id)
+            this.$router.push({
+                name: 'addserviceorder',
                 params: {
                     customerID: customer_id
                 }

@@ -11,6 +11,18 @@ router.post('/addnew', (req, res, next) =>{
             res.sendStatus(200)
           })
           .catch(next) 
-      }) 
+      })
+
+
+//find all cars
+router.get('/find', (req, res, next) => {
+    const db = req.app.get('db')
+
+    return db.Car.findAll({
+  
+        raw : true,
+    }).then((Cars) => res.send(Cars)).catch((err) => {console.log('There was an error in getting car  List')
+        return res.send(err)})
+})
 
 module.exports = router

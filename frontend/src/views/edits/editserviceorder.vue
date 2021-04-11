@@ -2,7 +2,11 @@
     <div>
         <form class="editForm" onsubmit="return false;">
             <div class="editForm-left">
+<<<<<<< Updated upstream
 
+=======
+               
+>>>>>>> Stashed changes
             <br>
             <label>Service Status</label>
             <br>
@@ -42,10 +46,16 @@
                 <button v-if="!isNew" class="swal2-styled" v-on:click="updateServiceOrder">Update</button> 
             </div>
             <br><br><br>
+<<<<<<< Updated upstream
             <div class="editForm-right">
             
                 <div slot="table-actions"></div>
 
+=======
+            <div class="editForm-right"> 
+            
+                <div slot="table-actions"></div>
+>>>>>>> Stashed changes
                 <vue-good-table
                     :columns="dataFields"
                     :rows="SERVICE_LINE"
@@ -58,7 +68,10 @@
                     :sort-options="{
                     enabled: true,
                     initialSortBy: {field: 'serviceTypeDesc', type: 'asc'}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                     }"
                     :pagination-options="{
                     enabled: true,
@@ -73,12 +86,20 @@
                     ofLabel: 'of',
                     }"
                     compactMode
+<<<<<<< Updated upstream
 
                 />
 
   
                 </div>
 
+=======
+                    
+                />
+
+            
+                </div>
+>>>>>>> Stashed changes
         </form>
         
 </div>
@@ -105,6 +126,10 @@ export default {
             SERVICE_LINE: [],
             svcorder:{
                 model: {
+<<<<<<< Updated upstream
+=======
+                    carID: '',
+>>>>>>> Stashed changes
                     serviceOrderStatusID: '',
                     serviceOrderDate: '',
                     serviceOrderEstimatedCompletion: '',
@@ -113,8 +138,11 @@ export default {
             },
             dataFields: [{
                 label: 'Service Type',
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
                 field: 'serviceTypeDesc'
             },{
                 label: 'Service Part',
@@ -136,7 +164,10 @@ export default {
                 field: 'serviceOrderLineStatus'
             }
             ]
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         }
     },
     components: {
@@ -147,6 +178,7 @@ export default {
             axios.get('http://localhost:3000/api/serviceorders/find/' + this.serviceOrderID)
                 .then((res) =>{
                     this.DB_DATA = res.data;
+<<<<<<< Updated upstream
                     this.svcorder.model.carID = this.DB_DATA[0].carID,
                     this.svcorder.model.serviceTypeID = this.DB_DATA[0].serviceTypeID,
                     this.svcorder.model.serviceOrderStatusID = this.DB_DATA[0].serviceOrderStatusID,
@@ -161,6 +193,8 @@ export default {
 
 
 =======
+=======
+>>>>>>> Stashed changes
                     
                     this.svcorder.model.serviceOrderStatusID = this.DB_DATA[0].serviceOrderStatusID,
                     this.svcorder.model.serviceOrderDate = this.DB_DATA[0].serviceOrderDate,
@@ -182,7 +216,10 @@ export default {
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partSellPrice','partSellPrice'))
                 })
         },
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
         loadDropDowns(){
             axios.get('http://localhost:3000/api/servicetypes/find').then((res) =>{

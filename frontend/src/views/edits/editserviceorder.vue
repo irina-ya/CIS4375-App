@@ -87,7 +87,8 @@
                     compactMode
 
                 />
-
+                <br>
+                <p>Order Total: ${{ this.invoice_total }}</p>
   
                 </div>
 
@@ -111,6 +112,7 @@ export default {
     data(){
         return{
             isNew: 'true',
+            invoice_total: 0,
             DB_DATA: [],
             STATUS_DATA: [],
             TYPE_DATA: [],
@@ -142,13 +144,13 @@ export default {
                 field: 'serviceLaborHours'
             },{
                 label: 'Service Line Cost',
-                field: 'serviceOrderLineCost'
+                field: 'serviceOrderLineCost',
+                type: 'number'
             },{
                 label: 'Status',
                 field: 'serviceOrderLineStatus'
             }
-            ]
-            
+            ],
         }
     },
     components: {
@@ -180,8 +182,16 @@ export default {
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Order_Line_Status.serviceOrderLineStatus','serviceOrderLineStatus'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partDescription','partDescription'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Part.partSellPrice','partSellPrice'))
+                    
+                    //calculate invoice total
+                    var total = this.SERVICE_LINE.map(cost => cost.serviceOrderLineCost).reduce((x, cost) => cost+x);
+                    console.log(total)
+                    this.invoice_total = total;
+                    
                 })
         },
+
+        
 
         loadDropDowns(){
             axios.get('http://localhost:3000/api/servicetypes/find').then((res) =>{
@@ -243,5 +253,9 @@ export default {
 
 </script>
 <style scoped>
-
+p{
+    
+    font-size: 1em;
+    padding-left: 65%;
+}
 </style>

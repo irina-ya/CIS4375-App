@@ -19,7 +19,7 @@ router.get('/find', (req, res, next) => {
 router.get('/find/:serviceOrderID', (req, res, next) => {
   const db = req.app.get('db')
   const svcOrderID = req.params.serviceOrderID
-  return db.Service_Order.find({
+  return db.Service_Order.findAll({
     where: {serviceOrderID: svcOrderID},
     include: [
         db.Service_Order_Status,

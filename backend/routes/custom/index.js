@@ -15,7 +15,10 @@ const colors = require('./colors')
 const car = require('./car')
 const serviceorderstatus = require('./serviceorderstatus')
 const servicetypes = require('./servicetypes')
+<<<<<<< Updated upstream
 const { route } = require('./serviceorderstatus')
+=======
+>>>>>>> Stashed changes
 const serviceorderline = require('./serviceorderline')
 
 

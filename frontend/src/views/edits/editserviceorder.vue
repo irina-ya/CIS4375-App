@@ -2,7 +2,21 @@
     <div>
         <form class="editForm" onsubmit="return false;">
             <div class="editForm-left">
+
+            <label>Car</label>
             <br>
+            <select
+                v-model="svcorder.model.carID"
+                name="carID"
+                >
+              <option
+                v-for="(data, index) in CAR_DATA"
+                :key="index" :value="data.carID">
+               {{ data.licensePlate }}
+              </option>
+            </select>
+            <br><br>
+            
             <label>Service Status</label>
             <br>
             <select
@@ -92,7 +106,7 @@ import Swal from 'sweetalert2'
 
 export default {
     name: 'editserviceorder',
-    props: ["serviceOrderID"],
+    props: ["serviceOrderID", "customerID"],
 
     data(){
         return{
@@ -100,6 +114,7 @@ export default {
             DB_DATA: [],
             STATUS_DATA: [],
             TYPE_DATA: [],
+            CAR_DATA: [],
             SERVICE_LINE: [],
             svcorder:{
                 model: {
@@ -133,6 +148,7 @@ export default {
                 field: 'serviceOrderLineStatus'
             }
             ]
+            
         }
     },
     components: {
@@ -158,7 +174,6 @@ export default {
             axios.get(`http://localhost:3000/api/serviceorderline/find/`+ this.serviceOrderID)
                 .then((response) => {
                     this.SERVICE_LINE = response.data;
-                   
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborCost','serviceLaborCost'))
                     this.SERVICE_LINE.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborHours','serviceLaborHours'))
@@ -175,10 +190,16 @@ export default {
                 Swal.fire('Error', 'Something went wrong! with Service type', 'error')
                 })
 
-        axios.get('http://localhost:3000/api/serviceorderstatus/find').then((res) =>{
+            axios.get('http://localhost:3000/api/serviceorderstatus/find').then((res) =>{
                 this.STATUS_DATA = res.data;
                 }).catch(() => {
                  Swal.fire('Error', 'Something went wrong! with service order status', 'error')
+                })
+
+            axios.get('http://localhost:3000/api/car/find/' + this.customerID).then((res) =>{
+                this.CAR_DATA = res.data;
+                }).catch(() => {
+                 Swal.fire('Error', 'Something went wrong! with car', 'error')
                 })
 
         },
@@ -187,7 +208,6 @@ export default {
             obj[newKey] = obj[oldKey];
             delete obj[oldKey];
             },
-
         updateServiceOrder(){
             const serviceOrderID = this.serviceOrderID
             axios.put(`http://localhost:3000/api/serviceorders/update/` + serviceOrderID, this.svcorder.model)

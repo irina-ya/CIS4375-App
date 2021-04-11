@@ -65,6 +65,9 @@ data() {
         label: 'Car ID',
         field: 'carID'
       },{
+        label: 'Customer ID',
+        field: 'customerID'
+      },{
         label: 'Service Status',
         field: 'serviceOrderStatus'
       },{
@@ -91,7 +94,7 @@ components: {
       axios.get(`http://localhost:3000/api/serviceorders/find`)
         .then((response) => {
           this.DB_DATA = response.data;
-          //this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'));
+          this.DB_DATA.forEach(obj => this.renameKey(obj, 'Customer.customerID','customerID'));
           this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Order_Status.serviceOrderStatus','serviceOrderStatus'));
           }
           ).catch(() => {
@@ -101,7 +104,8 @@ components: {
       this.$router.push({
         name: '/serviceorders/editserviceorder',
         params: {
-          serviceOrderID: params.row.serviceOrderID
+          serviceOrderID: params.row.serviceOrderID,
+          customerID: params.row.customerID
         }
       })
     }

@@ -51,14 +51,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    serviceOrderID: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'Service_Order',
-        key: 'serviceOrderID'
-      }
-    }
+    
   }, {
     sequelize,
     tableName: 'Car',

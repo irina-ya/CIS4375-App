@@ -24,6 +24,7 @@ router.get('/find/:serviceOrderID', (req, res, next) => {
     include: [
         db.Service_Order_Status,
         db.Customer
+        
     ],
       raw : true,
   }).then((Service_Orders) => 

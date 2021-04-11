@@ -8,7 +8,6 @@ router.get('/find', (req, res, next) => {
     return db.Service_Order.findAll({
       include: [
         db.Service_Order_Status,
-        db.Service_Type,
         db.Customer
       ],
         raw : true,
@@ -24,7 +23,6 @@ router.get('/find/:serviceOrderID', (req, res, next) => {
     where: {serviceOrderID: svcOrderID},
     include: [
         db.Service_Order_Status,
-        db.Service_Type,
         db.Customer
     ],
       raw : true,

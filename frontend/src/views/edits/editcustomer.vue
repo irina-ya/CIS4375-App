@@ -203,9 +203,8 @@ export default {
         },
         
         addNewCar(){
-            //console.log(this.DB_DATA.customerID)
-            const customer_id = this.DB_DATA.customerID
-            //console.log(customer_id)
+            
+            const customer_id = this.customerID
             this.$router.push({
                 name: 'addcar',
                 params: {
@@ -214,9 +213,8 @@ export default {
             })
         },
         addNewServiceOrder(){
-            //console.log(this.DB_DATA.customerID)
-            const customerID = this.DB_DATA.customerID
-            //console.log(customer_id)
+            
+            const customerID = this.customerID
             this.$router.push({
                 name: 'addserviceorder',
                 params: {

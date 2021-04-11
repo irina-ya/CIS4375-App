@@ -9,22 +9,6 @@
                     v-model="svcorder.model.carID"
                 />
             <br>
-
-            <label>Service Type</label>
-            <br>
-            <select
-                v-model="svcorder.model.serviceTypeID"
-                name="serviceTypeID"
-                >
-              <option
-                v-for="(data, index) in TYPE_DATA"
-                :key="index" :value="data.serviceTypeID">
-               {{ data.serviceTypeDesc }}
-              </option>
-            </select>
-
-            <br>
-
             <label>Service Status</label>
             <br>
             <select
@@ -38,7 +22,7 @@
               </option>
             </select>
 
-            <br>
+            <br><br>
                 <FormulateInput
                     type="text"
                     label="Date of Service"
@@ -59,15 +43,43 @@
                     name="serviceOrderComments"
                     v-model="svcorder.model.serviceOrderComments"
                 />
+               <button v-if="!isNew" class="swal2-styled" v-on:click="deleteServiceOrder">Delete</button>
+                <button v-if="!isNew" class="swal2-styled" v-on:click="updateServiceOrder">Update</button> 
             </div>
             <br><br><br>
             <div class="editForm-right"> 
-            <div class="editFooter">
-                <button v-if="!isNew" class="swal2-styled" v-on:click="deleteServiceOrder">Delete</button>
-                <button v-if="!isNew" class="swal2-styled" v-on:click="updateServiceOrder">Update</button>
-            </div>
+
+                <vue-good-table
+                    :columns="dataFields"
+                    :rows="SERVICE_LINE"
+                    :row-style-class="'rowStyle'"
+                    :search-options="{
+                    enabled: true,
+                    skipDiacritics: true,
+                    placeholder: 'Search this table',
+                    }"
+                    :sort-options="{
+                    enabled: true,
+                    initialSortBy: {field: 'serviceTypeID', type: 'asc'}
+                    }"
+                    :pagination-options="{
+                    enabled: true,
+                    mode: 'records',
+                    perPage: 10,
+                    position: 'top',
+                    perPageDropdown: [3, 5, 10, 25, 50, 100],
+                    dropdownAllowAll: false,
+                    nextLabel: 'next',
+                    prevLabel: 'prev',
+                    rowsPerPageLabel: 'Rows per page',
+                    ofLabel: 'of',
+                    }"
+                    compactMode
+                    @on-row-dblclick="editServiceLine"
+                />
 
             </div>
+            
             
         </form>
 
@@ -90,16 +102,27 @@ export default {
             DB_DATA: [],
             STATUS_DATA: [],
             TYPE_DATA: [],
+            SERVICE_LINE: [],
             svcorder:{
                 model: {
                     carID: '',
-                    serviceTypeID: '',
+                    //serviceTypeID: '',
                     serviceOrderStatusID: '',
                     serviceOrderDate: '',
                     serviceOrderEstimatedCompletion: '',
                     serviceOrderComments: ''
                 }
-            }
+            },
+            dataFields: [{
+                label: 'Service Type',
+                field: 'customerID',
+            },{
+                label: 'Labor Cost',
+                field: 'customerFirstName'
+            },{
+                label: 'Labor Hours',
+                field: 'customerLastName'
+            }]
         }
     },
 
@@ -116,59 +139,45 @@ export default {
                     this.svcorder.model.serviceOrderEstimatedCompletion = this.DB_DATA[0].serviceOrderEstimatedCompletion,
                     this.svcorder.model.serviceOrderComments = this.DB_DATA[0].serviceOrderComments
 
-
-            //         this.svcorder.model.carID = res.data.carID,
-            //         this.svcorder.model.serviceTypeID = res.data.serviceTypeID,
-            //         this.svcorder.model.serviceOrderStatusID = res.data.serviceOrderStatusID,
-            //         this.svcorder.model.serviceOrderDate = res.data.serviceOrderDate,
-            //         this.svcorder.model.serviceOrderEstimatedCompletion = res.data.serviceOrderEstimatedCompletion,
-            //         this.svcorder.model.serviceOrderComments = res.data.serviceOrderComments
          })
+
         },
+
+
+
         loadDropDowns(){
             axios.get('http://localhost:3000/api/servicetypes/find').then((res) =>{
                 this.TYPE_DATA = res.data;
             }).catch(() => {
-          Swal.fire('Error', 'Something went wrong! with Service type', 'error')
-        })
+                Swal.fire('Error', 'Something went wrong! with Service type', 'error')
+                })
 
         axios.get('http://localhost:3000/api/serviceorderstatus/find').then((res) =>{
                 this.STATUS_DATA = res.data;
-            }).catch(() => {
-          Swal.fire('Error', 'Something went wrong! with service order status', 'error')
-        })
+                }).catch(() => {
+                 Swal.fire('Error', 'Something went wrong! with service order status', 'error')
+                })
 
         },
         updateServiceOrder(){
             const serviceOrderID = this.serviceOrderID
             axios.put(`http://localhost:3000/api/serviceorders/update/` + serviceOrderID, this.svcorder.model)
-                .then((res) => {
                 
                 Swal.fire({
                     title: 'Done!',
                     text: 'The service order has been updated!',
                     icon: 'success'
                 })
-                $this.router.push('/serviceorders')
-                })
-                .catch(() => {
-                Swal.fire('Error', 'Something went wrong (updating service order)', 'error')
-                })
+                $this.router.push('/serviceorders')     
         },
         deleteServiceOrder(){
         const serviceOrderID = this.serviceOrderID
         axios.delete(`http://localhost:3000/api/serviceorders/delete/` + serviceOrderID)
-            .then((res) => {
-
             Swal.fire(
                 'Done!',
                 'The service order has been deleted.',
                 'success'
             )
-            })
-            .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting service order)', 'error')
-            })
             }
 
     },

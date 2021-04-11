@@ -65,9 +65,6 @@ data() {
         label: 'Car ID',
         field: 'carID'
       },{
-        label: 'Service Type',
-        field: 'serviceTypeDesc'
-      },{
         label: 'Service Status',
         field: 'serviceOrderStatus'
       },{
@@ -94,7 +91,7 @@ components: {
       axios.get(`http://localhost:3000/api/serviceorders/find`)
         .then((response) => {
           this.DB_DATA = response.data;
-          this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'));
+          //this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'));
           this.DB_DATA.forEach(obj => this.renameKey(obj, 'Service_Order_Status.serviceOrderStatus','serviceOrderStatus'));
           }
           ).catch(() => {

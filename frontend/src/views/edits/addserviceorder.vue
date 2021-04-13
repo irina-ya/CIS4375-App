@@ -15,6 +15,18 @@
                 </option>
                 </select>
         <br><br>
+        <label>Service Type</label>
+        <br>
+        <select
+                v-model="serviceorder.model.serviceTypeID"
+                name="serviceTypeID">
+                <option
+                    v-for="(data, index) in TYPE_DATA"
+                    :key="index" :value="data.serviceTypeID">
+                {{ data.serviceTypeDesc }}
+                </option>
+                </select>
+        <br><br>
         <label>Service Status</label>
         <br>
         <select
@@ -110,7 +122,7 @@ export default {
     createServiceOrder() {
       axios.post(
         'http://localhost:3000/api/serviceorders/addnew',
-        this.serviceorder.model,
+        this.serviceorder.model
       )
       Swal.fire({
         title: 'Done!',

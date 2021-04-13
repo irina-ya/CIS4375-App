@@ -2,14 +2,7 @@
   <div>
     <form class="editForm" onsubmit="return false;">
       <div class="editForm-left">
-        <FormulateInput
-          type="text"
-          label="Car ID"
-          name="carID"
-          v-model="serviceorder.model.carID"
-        />
-        <br>
-
+        
         <label>License Plate</label>
         <br>
         <select
@@ -106,15 +99,11 @@ export default {
           Swal.fire('Error', 'Something went wrong! with service order status', 'error')
         })
 
-        axios.get('http://localhost:3000/api/car/find').then((res) =>{
+        axios.get('http://localhost:3000/api/car/find/' + this.customerID).then((res) =>{
                 this.CAR_DATA = res.data;
-                //this.CAR_DATA.array.forEach(element => {
-                  //serviceorder.model.customerID = this.customerID
-                  //this.customerID = serviceorder.model.customerID
-               // });
-            }).catch(() => {
-          Swal.fire('Error', 'Something went wrong! with car', 'error')
-        })
+                }).catch(() => {
+                 Swal.fire('Error', 'Something went wrong! with car', 'error')
+                })
 
     },
 

@@ -4,7 +4,7 @@
    
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Service Parts List</span>
+        <span class="tableHeading-text">Service Parts</span>
       </div>
       <div class="tableHeading-right">
         <button v-on:click="addNewServicePart">Add New Service Part</button>

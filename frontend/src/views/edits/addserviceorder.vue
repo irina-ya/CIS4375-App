@@ -129,6 +129,7 @@ export default {
         text: 'The service order has been added!',
         icon: 'success',
       })
+      this.$router.push('/serviceorders/') 
     },
   },
 

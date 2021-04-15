@@ -2,7 +2,7 @@
   <nav style="backgroundColor: #1C2331" class="navbar navbar-expand-lg navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <span class="navbar-brand">Outback AutoRepair</span>
+        <span class="navbar-brand">Outback Auto Repair</span>
       </li>
       <li class="nav-item">
         <router-link

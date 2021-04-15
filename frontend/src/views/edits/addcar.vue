@@ -141,6 +141,7 @@ export default {
                     text: 'The customer has been added!',
                     icon: 'success'
                 })
+                this.$router.push('/customers/') 
             
 
         }

@@ -140,6 +140,10 @@ export default {
       },
       dataFields: [
         {
+          label: 'ID',
+          field: 'serviceOrderLineID',
+        },
+        {
           label: 'Service Type',
           field: 'serviceTypeDesc',
         },
@@ -296,7 +300,7 @@ export default {
         text: 'The service order has been updated!',
         icon: 'success',
       })
-      $this.router.push('/serviceorders')
+      this.$router.push('/serviceorders')
     },
     deleteServiceOrder() {
       const serviceOrderID = this.serviceOrderID
@@ -304,20 +308,22 @@ export default {
         `http://localhost:3000/api/serviceorders/delete/` + serviceOrderID,
       )
       Swal.fire('Done!', 'The service order has been deleted.', 'success')
+      this.$router.push('/serviceorders/') 
     },
     editServiceOrderLine(params) {
       this.$router.push({
         name: 'editserviceorderline',
         params: {
-          serviceOrderID: params.row.serviceOrderID,
+          serviceOrderLineID: params.row.serviceOrderLineID,
+          serviceOrderID: this.serviceOrderID
         },
       })
     },
-    addNewServiceOrderLine(params) {
+    addNewServiceOrderLine() {
       this.$router.push({
         name: 'addserviceorderline',
         params: {
-          serviceOrderID: params.row.serviceOrderID,
+          serviceOrderID: this.serviceOrderID,
         },
       })
     }

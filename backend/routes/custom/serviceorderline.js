@@ -19,7 +19,25 @@ router.get('/find/:serviceOrderID', (req, res, next) => {
         return res.send(err)})
   })
 
-  //Update service order line
+  //Find individual
+router.get('/find/individual/:serviceOrderLineID', (req, res, next) => {
+  const db = req.app.get('db')
+  const serviceOrderLineID = req.params.serviceOrderLineID
+  
+  return db.Service_Order_Line.findAll({
+    where: {serviceOrderLineID: serviceOrderLineID},
+    include: [
+      db.Service_Type,
+      db.Service_Order_Line_Status,
+      db.Service_Part
+    ],
+      raw : true,
+  }).then((serviceOrderLine) => 
+    res.send(serviceOrderLine)).catch((err) => {console.log('There was an error in getting the order line')
+      return res.send(err)})
+})
+
+//Update service order line
 router.put('/update/:serviceOrderLineID', (req, res, next) => {
   const db = req.app.get('db')
 

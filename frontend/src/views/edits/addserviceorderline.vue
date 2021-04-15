@@ -14,7 +14,10 @@
             {{ data.serviceTypeDesc }}
           </option>
         </select>
-        <br />
+        <br><br>
+
+
+
         <label>Service Part</label>
         <br />
         <select v-model="svcorderline.model.servicePartID" name="servicePartID">
@@ -26,46 +29,35 @@
             {{ data.partDescription }}
           </option>
         </select>
-        <br />
-        <FormulateInput
-          type="number"
-          label="Service Part Cost"
-          name="partSellPrice"
-          v-model="svcorderline.model.serviceOrderDate"
+        <br><br>
+            <FormulateInput
+              type="text"
+              label="Service Line Cost"
+              name="serviceOrderLineCost"
+              v-model="svcorderline.model.serviceOrderLineCost"
         />
-        <br />
-        <FormulateInput
-          type="text"
-          label="Labor Cost"
-          name="serviceLaborCost"
-          v-model="svcorderline.model.serviceOrderEstimatedCompletion"
-        />
-        <br />
-        <FormulateInput
-          type="text"
-          label="Labor Hours"
-          name="serviceLaborHours"
-          v-model="svcorderline.model.serviceOrderComments"
-        />
-        <br />
-        <FormulateInput
-          type="text"
-          label="Service Line Cost"
-          name="serviceOrderLineCost"
-          v-model="svcorderline.model.serviceOrderLineCost"
-        />
-        <br />
-        <FormulateInput
-          type="text"
-          label="Service Order Line Status"
-          name="serviceOrderLineStatus"
+        <br>
+        <label>Service Status</label>
+        <br>
+        <select
           v-model="svcorderline.model.serviceOrderLineStatusID"
-        />
-      </div>
-
-      <button class="swal2-styled" v-on:click="createOrderLine">
+          name="serviceOrderStatusID"
+        >
+          <option
+            v-for="(data, index) in STATUS_DATA"
+            :key="index"
+            :value="data.serviceOrderLineStatusID"
+          >
+            {{ data.serviceOrderLineStatus }}
+          </option>
+        </select>
+        <br><br>
+        <button class="swal2-styled" v-on:click="createOrderLine">
         Add Order Line to Service Order
       </button>
+      </div>
+
+      
     </form>
   </div>
 </template>
@@ -83,6 +75,7 @@ export default {
       DB_DATA: [],
       PART_DATA: [],
       TYPE_DATA: [],
+      STATUS_DATA: [],
       svcorderline: {
         model: {
           serviceOrderID: this.serviceOrderID,
@@ -109,7 +102,6 @@ export default {
       axios
         .get('http://localhost:3000/api/serviceparts/find')
         .then(res => {
-          console.log(JSON.stringify(res.data))
           this.PART_DATA = res.data
         })
         .catch(() => {
@@ -119,18 +111,30 @@ export default {
             'error',
           )
         })
+
+      axios
+        .get('http://localhost:3000/api/serviceorderlinestatus/find')
+        .then(res => {
+          this.STATUS_DATA = res.data
+        })
+        .catch(() => {
+          Swal.fire(
+            'Error',
+            'Something went wrong! with service order status',
+            'error',
+          )
+        })
     },
 
     createOrderLine() {
       axios.post(
-        'http://localhost:3000/api/serviceorderline/addnew',
-        this.svcorderline.model,
-      )
+        'http://localhost:3000/api/serviceorderline/addnew', this.svcorderline.model)
       Swal.fire({
         title: 'Done!',
         text: 'The service order line has been added!',
         icon: 'success',
       })
+      this.router.push('/serviceorders')
     },
   },
 

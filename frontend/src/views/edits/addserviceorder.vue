@@ -14,10 +14,10 @@
                 {{ data.licensePlate }}
                 </option>
                 </select>
-        <br><br>
-        <label>Service Type</label>
-        <br>
-        <select
+              <br><br>
+              <label>Service Type</label>
+              <br>
+              <select
                 v-model="serviceorder.model.serviceTypeID"
                 name="serviceTypeID">
                 <option

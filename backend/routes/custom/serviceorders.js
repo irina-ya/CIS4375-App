@@ -65,7 +65,7 @@ router.delete('/delete/:serviceOrderID', (req, res, next) => {
   const serviceOrderID = req.params.serviceOrderID;
   const db = req.app.get('db')
 
-  db.Service_Part.destroy({
+  db.Service_Order.destroy({
       where: { serviceOrderID: serviceOrderID }
   }).then(() => {
       res.status(200).send('The record has been deleted!');

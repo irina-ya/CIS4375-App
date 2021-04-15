@@ -7,15 +7,14 @@
                 <br>
                 <select
                     v-model="svcorderline.model.serviceTypeID"
-                    name="serviceTypeID"
-                    >
+                    name="serviceTypeID">
                 <option
                     v-for="(data, index) in TYPE_DATA"
                     :key="index" :value="data.serviceTypeID">
                 {{ data.serviceTypeDesc }}
                 </option>
                 </select>
-                <br/>
+                <br><br>
                 <label>Service Part</label>
                 <br>
                 <select
@@ -28,26 +27,26 @@
                 {{ data.partDescription }}
                 </option>
                 </select>
-                <br/>
+                <br><br>
                     <FormulateInput
                         type="number"
                         label="Service Part Cost"
                         name="partSellPrice"
-                        v-model="svcorderline.model.serviceOrderDate"
+                        v-model="svcorderline.model.partSellPrice"
                     />
                 <br>
                     <FormulateInput
                         type="text"
                         label="Labor Cost"
                         name="serviceLaborCost"
-                        v-model="svcorderline.model.serviceOrderEstimatedCompletion"
+                        v-model="svcorderline.model.serviceLaborCost"
                     />
                 <br>
                     <FormulateInput
                         type="text"
                         label="Labor Hours"
                         name="serviceLaborHours"
-                        v-model="svcorderline.model.serviceOrderComments"
+                        v-model="svcorderline.model.serviceLaborHours"
                     />
                     <br>
                     <FormulateInput
@@ -57,13 +56,21 @@
                         v-model="svcorderline.model.serviceOrderLineCost"
                     />
                     <br>
-                    <FormulateInput
-                        type="text"
-                        label="Service Order Line Status"
-                        name="serviceOrderLineStatus"
-                        v-model="svcorderline.model.serviceOrderLineStatusID"
-                    />
-        
+                    <label>Service Status</label>
+                    <br>
+                    <select
+                    v-model="svcorderline.model.serviceOrderLineStatusID"
+                    name="serviceOrderStatusID"
+                    >
+                    <option
+                        v-for="(data, index) in STATUS_DATA"
+                        :key="index"
+                        :value="data.serviceOrderLineStatusID"
+                    >
+                        {{ data.serviceOrderLineStatus }}
+                    </option>
+                    </select>
+                    <br><br>
                 <div class="editFooter">
                     <button class="swal2-styled" v-on:click="deleteServiceOrderLine">Delete</button>
                     <button class="swal2-styled" v-on:click="updateServiceOrderLine">Update</button>
@@ -82,7 +89,7 @@ import Swal from 'sweetalert2'
 
 export default {
     name: 'editserviceorderline',
-    props: ["serviceOrderLineID"],
+    props: ["serviceOrderLineID", "serviceOrderID"],
 
     data(){
         return{
@@ -90,14 +97,17 @@ export default {
             DB_DATA: [],
             PART_DATA: [],
             TYPE_DATA: [],
-            SERVICE_LINE: [],
+            STATUS_DATA: [],
             svcorderline:{
                 model: {
-                    serviceOrderID: '',
+                    serviceOrderID: this.serviceOrderID,
                     serviceTypeID: '',
                     servicePartID: '',
                     serviceOrderLineStatusID: '',
-                    serviceOrderLineCost: ''
+                    serviceOrderLineCost: '',
+                    partSellPrice: '',
+                    serviceLaborCost: '',
+                    serviceLaborHours: ''
                 }
             }
         }
@@ -107,22 +117,26 @@ export default {
     },
     methods: {
         populateServiceOrderLineData(){
-            axios.get(`http://localhost:3000/api/serviceorderline/find/`+ this.serviceOrderID)
+            axios.get(`http://localhost:3000/api/serviceorderline/find/individual/`+ this.serviceOrderLineID)
                 .then((response) => {
                     this.DB_DATA = response.data;
-
-                    this.svcorderline.model.serviceOrderID = this.DB_DATA[0].serviceOrderID,
+                    
+                    //this.svcorderline.model.serviceOrderID = this.DB_DATA[0].serviceOrderID,
                     this.svcorderline.model.serviceTypeID = this.DB_DATA[0].serviceTypeID,
                     this.svcorderline.model.servicePartID = this.DB_DATA[0].servicePartID,
                     this.svcorderline.model.serviceOrderLineStatusID = this.DB_DATA[0].serviceOrderLineStatusID,
                     this.svcorderline.model.serviceOrderLineCost = this.DB_DATA[0].serviceOrderLineCost
                    
-                    this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'))
+                    //this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Type.serviceTypeDesc','serviceTypeDesc'))
                     this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborCost','serviceLaborCost'))
                     this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Type.serviceLaborHours','serviceLaborHours'))
-                    this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Order_Line_Status.serviceOrderLineStatus','serviceOrderLineStatus'))
                     this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Part.partDescription','partDescription'))
                     this.DB_DATA.forEach( obj => this.renameKey(obj, 'Service_Part.partSellPrice','partSellPrice'))
+
+                    this.svcorderline.model.partSellPrice = this.DB_DATA[0].partSellPrice,
+                    this.svcorderline.model.serviceLaborHours = this.DB_DATA[0].serviceLaborHours,
+                    this.svcorderline.model.serviceLaborCost = this.DB_DATA[0].serviceLaborCost
+
                 })
         },
 
@@ -134,11 +148,19 @@ export default {
                 })
 
         axios.get('http://localhost:3000/api/serviceparts/find').then((res) =>{
-                console.log(JSON.stringify(res.data))
                 this.PART_DATA = res.data;
                 }).catch(() => {
                  Swal.fire('Error', 'Something went wrong! with service parts', 'error')
                 })
+        axios.get('http://localhost:3000/api/serviceorderlinestatus/find').then(res => {
+          this.STATUS_DATA = res.data
+        }).catch(() => {
+          Swal.fire(
+            'Error',
+            'Something went wrong! with service order status',
+            'error',
+          )
+        })
 
         },
 
@@ -148,25 +170,28 @@ export default {
             },
 
         updateServiceOrderLine(){
-            const serviceOrderID = this.serviceOrderID
-            axios.put(`http://localhost:3000/api/serviceorderline/update/` + serviceOrderID, this.svcorderline.model)
+            const serviceOrderLineID = this.serviceOrderLineID
+            axios.put(`http://localhost:3000/api/serviceorderline/update/` + serviceOrderLineID, this.svcorderline.model)
                 
                 Swal.fire({
                     title: 'Done!',
                     text: 'The service order has been updated!',
                     icon: 'success'
                 })
-                $this.router.push('/serviceorders')     
+                this.$router.push('/serviceorders/')     
         },
+
         deleteServiceOrderLine(){
-        const serviceOrderID = this.serviceOrderID
-        axios.delete(`http://localhost:3000/api/serviceorderline/delete/` + serviceOrderID)
+        const serviceOrderLineID = this.serviceOrderLineID
+        axios.delete(`http://localhost:3000/api/serviceorderline/delete/` + serviceOrderLineID)
             Swal.fire(
                 'Done!',
                 'The service order has been deleted.',
                 'success'
             )
+            this.$router.push('/serviceorders/') 
         },
+
         addNewServiceOrderLine(){
             axios.post('http://localhost:3000/api/serviceorderline/addnew', this.svcorderline.model)
             .then((res) => {

@@ -1,7 +1,9 @@
 <template>
   <div class="jumbotron">
-    <h1 class="display-3">Demo</h1>
-    <p>Demo System.</p>
+    <center>
+    <h1 class="display-3">Outback Auto Repair</h1>
+    <p>Order Management System</p>
+    </center>
   </div>
 </template>
 

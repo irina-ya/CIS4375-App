@@ -22,32 +22,31 @@
         <mdb-col md="3" lg="4" xl="3" class="mb-3">
           <h6 class="text-uppercase white-text fw-bold"><strong>Outback Auto Repair</strong></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit.</p>
+          <p>Auto mechanic shop that specializes in all types of repairs from cars. trucks, tractors, and trailers.</p>
         </mdb-col>
         <mdb-col md="2" lg="2" xl="2" class="mb-3">
           <h6 class="text-uppercase white-text fw-bold"><strong>OAR Links</strong></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-          <p><a href="#!">Customers</a></p>
-          <p><a href="#!">Service Orders</a></p>
-          <p><a href="#!">Service Parts</a></p>
-          <p><a href="#!">Invoices</a></p>
+          <p><router-link to="/customers">Customers</router-link></p>
+          <p><router-link to="/serviceorders">Service Orders</router-link></p>
+          <p><router-link to="/serviceparts">Service Parts</router-link></p>
+          <p><router-link to="/serviceorders">Invoices</router-link></p>
         </mdb-col>
         <mdb-col md="2" lg="2" xl="2" class="mb-3">
           <h6 class="text-uppercase white-text fw-bold"><strong>Useful links</strong></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-          <p><a href="#!">Your Account</a></p>
-          <p><a href="#!">Contact Us</a></p>
-          <p><a href="#!">Services We Offer</a></p>
-          <p><a href="#!">Help</a></p>
+          <p><router-link to="/account">Your Account</router-link></p>
+          <p><router-link to="/contact">Contact Us</router-link></p>
+          <p><router-link to="/services">Services We Offer</router-link></p>
+          <p><router-link to="/help">Help</router-link></p>
         </mdb-col>
         <mdb-col md="4" lg="3" xl="3" class="mb-3">
           <h6 class="text-uppercase white-text fw-bold"><strong>Contact</strong></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-          <p><i class="fas fa-building mr-3"></i> New York, NY 10012, US</p>
-          <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-          <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          <p><i class="fas fa-building mr-3"></i>6032 Neiman Rd, Brookshire, TX 77423</p>
+          <p><i class="fas fa-envelope mr-3"></i>winterbauer@consolidated.net</p>
+          <p><i class="fas fa-phone mr-3"></i>(832) 232-2986</p>
+          
         </mdb-col>
       </mdb-row>
     </mdb-container>

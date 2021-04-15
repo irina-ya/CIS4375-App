@@ -9,6 +9,9 @@ import customers from '../views/home/customers.vue'
 import serviceorders from '../views/home/serviceorders.vue'
 import serviceparts from '../views/home/serviceparts.vue'
 import contact from '../views/home/contact.vue'
+import services from '../views/home/services.vue'
+import help from '../views/home/help.vue'
+
 // error
 import notFound from '../views/error/notFound.vue'
 // account
@@ -43,7 +46,7 @@ const router = new VueRouter({
     },
     {
       path: '/customers',
-      name: "customers",
+      name: 'customers',
       component: customers,
       //meta: {
       //  isOpen: true,
@@ -51,7 +54,7 @@ const router = new VueRouter({
     },
     {
       path: '/customers/editcustomer',
-      name: "/customers/editcustomer",
+      name: '/customers/editcustomer',
       props: true,
       component: editcustomer,
       //meta: {
@@ -67,30 +70,27 @@ const router = new VueRouter({
     },
     {
       path: '/serviceorders/editserviceorder',
-      name: "/serviceorders/editserviceorder",
+      name: '/serviceorders/editserviceorder',
       props: true,
       component: editserviceorder,
     },
     {
       path: '/addserviceorder',
-      name: "addserviceorder",
+      name: 'addserviceorder',
       component: addserviceorder,
-      props: true
-
+      props: true,
     },
     {
       path: '/addserviceorderline',
-      name: "addserviceorderline",
+      name: 'addserviceorderline',
       component: addserviceorderline,
-      props: true
-
+      props: true,
     },
     {
       path: '/editserviceorderline',
-      name: "editserviceorderline",
+      name: 'editserviceorderline',
       component: editserviceorderline,
-      props: true
-
+      props: true,
     },
     {
       path: '/serviceparts',
@@ -101,16 +101,15 @@ const router = new VueRouter({
     },
     {
       path: '/addcar',
-      name: "addcar",
+      name: 'addcar',
       component: addcar,
-      props: true
-
+      props: true,
     },
     {
       path: '/serviceparts/editservicepart',
-      name: "/serviceparts/editservicepart",
+      name: '/serviceparts/editservicepart',
       props: true,
-      component: editservicepart
+      component: editservicepart,
     },
     {
       path: '/auth/register',
@@ -136,6 +135,18 @@ const router = new VueRouter({
       component: account,
     },
     {
+      path: '/contact',
+      component: contact,
+    },
+    {
+      path: '/services',
+      component: services,
+    },
+    {
+      path: '/help',
+      component: help,
+    },
+    {
       path: '*',
       component: notFound,
       meta: {
@@ -157,7 +168,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else if (to.matched.some(record => record.meta.isOpen)) {*/
-    next()
+  next()
   /*} else {
     next({
       path: '/auth/login',
@@ -166,6 +177,6 @@ router.beforeEach((to, from, next) => {
       },
     })
   }*/
-}) 
+})
 
 export default router

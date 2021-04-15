@@ -4,7 +4,7 @@
    
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Customer List</span>
+        <span class="tableHeading-text">Customers</span>
       </div>
       <div class="tableHeading-right">
         <button v-on:click="addNewCustomer">Add New Customer</button>

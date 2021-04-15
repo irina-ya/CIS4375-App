@@ -4,7 +4,7 @@
    
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Service Orders List</span>
+        <span class="tableHeading-text">Service Orders</span>
       </div>
       <div class="tableHeading-right">
         

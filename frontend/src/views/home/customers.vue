@@ -89,6 +89,7 @@ components: {
           ).catch(() => {
           Swal.fire('Error', 'Something went wrong (Loading Customer List)', 'error')
         })},
+        
     editCustomer(params){
       this.$router.push({
         name: '/customers/editcustomer',

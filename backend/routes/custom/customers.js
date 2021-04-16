@@ -23,8 +23,7 @@ router.get('/find/:customerID', (req, res, next) => {
     where: {customerID: custumerID},
     include: [
       db.State_Table,
-      db.Customer_Status,
-      db.Car
+      db.Customer_Status
     ],
       raw : true,
   }).then((Customers) => 
@@ -46,6 +45,9 @@ router.put('/update/:customerID', (req, res, next) => {
   const customerAddress2 = req.body.customerAddress2
   const customerEmail = req.body.customerEmail
   const customerStatusID = req.body.customerStatusID
+  const customerZip = req.body.customerZip
+
+  console.log(customerZip)
 
   db.Customer.update({
     customerFirstName: customerFirstName,
@@ -55,7 +57,8 @@ router.put('/update/:customerID', (req, res, next) => {
     customerAddress2: customerAddress2,
     customerEmail: customerEmail,
     customerCity: customerCity, 
-    customerStatusID: customerStatusID
+    customerStatusID: customerStatusID,
+    customerZip: customerZip
   }, {
     where: {
       customerID: customerID

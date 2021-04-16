@@ -149,7 +149,8 @@ export default {
                     this.customer.model.customerAddress1 = this.DB_DATA[0].customerAddress1,
                     this.customer.model.customerAddress2 = this.DB_DATA[0].customerAddress2,
                     this.customer.model.customerStatusID = this.DB_DATA[0].customerStatusID,
-                    this.customer.model.stateID = this.DB_DATA[0].stateID
+                    this.customer.model.stateID = this.DB_DATA[0].stateID,
+                    this.customer.model.customerZip = this.DB_DATA[0].customerZip
             })
         },
 
